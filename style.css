@@ -15,7 +15,7 @@ center{
 
 .outer_box{
     width: 1067px;
-    height: 705px;
+    height: 750px;
     flex-shrink: 0;
     border-radius: 26px;
     top: 159px;
@@ -76,7 +76,7 @@ center{
     display: flex;
     justify-content: center;
     width: 1007px;
-    height: 580px;
+    height: 620px;
     flex-shrink: 0;
     top: 259px;
     left: 216px;
@@ -86,7 +86,7 @@ center{
 
 .inputs{
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-direction: column;
     align-items: center;
 }
@@ -119,6 +119,10 @@ input{
     color: rgba(0, 0, 0, 0.50);
 }
 
+.input1{
+    margin-top: 5px;
+}
+
 p{
     width: 398;
     height: 31;
@@ -131,6 +135,11 @@ p{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.p1{
+    margin-bottom: 50px;
+    margin-top: 30px;
 }
 
 button{
@@ -148,4 +157,8 @@ button{
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.b1{
+    margin-top: 30px;;
 }
