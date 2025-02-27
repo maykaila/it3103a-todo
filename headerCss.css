@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+header{
+    display: flex;
+    flex-direction: row;
+}
+
+header img{
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    margin-left: 25px;
+    margin-top: 20px;
+}
+
+header p{
+    width: 300px;
+    color: #000;
+    font-family: Silkscreen;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+    margin-top: 65px;
+    margin-left: 20px;
+}
+
+header span{
+    margin-left: 1050px;
+    margin-top: 65px;
+}
