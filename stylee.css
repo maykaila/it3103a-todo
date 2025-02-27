@@ -70,6 +70,7 @@ button{
 
 .tasks{
     margin-top: 20px;
+    margin-left: 150px;
     width: 932px;
     height: 69px;
     border-radius: 14px;
@@ -77,9 +78,12 @@ button{
 }
 
 input[type="checkbox"]{
+    appearance: none;
+    margin-right: 1000px;
+
     width: 77px;
     height: 79px;
 
     border-radius: 14px;
-    background: #E4D6A7;
+    background: #888;
 }
