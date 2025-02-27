@@ -18,6 +18,7 @@ body{
     width: 1350px;
     height: 620px;
     flex-shrink: 0;
+    /* margin-top: 10px; */
 
     border-radius: 29px;
     background: #E9B44C;
@@ -26,16 +27,59 @@ body{
 .options{
     display: flex;
     flex-direction: row;
+    
     gap: 10px;
+    margin-left: 90px;
+    
+    color: #000;
+    font-family: Silkscreen;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 
+#ongoing, #completed, #missed{
     width: 154px;
     height: 54px;
     flex-shrink: 0;
-
-    border-radius: 14px;
     background: #50A2A7;
+    border-radius: 14px;
+    margin-top: 30px;
 }
 
-#ongoing{
-    gap: 10px;
+button{
+    width: 215px;
+    height: 61px; 
+
+    right: 150px;
+    border-radius: 14px;
+    border-color: #50A2A7;
+    background: #50A2A7;
+
+    margin-left: 1050px;
+    margin-top: 30px;
+    
+    color: #000;
+    font-family: Silkscreen;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.tasks{
+    margin-top: 20px;
+    width: 932px;
+    height: 69px;
+    border-radius: 14px;
+    background: #E4D6A7;
+}
+
+input[type="checkbox"]{
+    width: 77px;
+    height: 79px;
+
+    border-radius: 14px;
+    background: #E4D6A7;
 }
