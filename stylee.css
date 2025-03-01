@@ -1,12 +1,16 @@
 body{
-    /* width: 1440px;
-    height: 1024px; */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+
     background: #E4D6A7;
 }
 
 .outer_box{
-    width: 1485px;
-    height: 756px;
+    width: 90%;
+    height: 79vh;
     flex-shrink: 0;
 
     border-radius: 26px;
@@ -15,8 +19,8 @@ body{
 }
 
 .inner_box{
-    width: 1350px;
-    height: 620px;
+    width: 92%;
+    height: 79%;
     flex-shrink: 0;
     /* margin-top: 10px; */
 
@@ -28,62 +32,66 @@ body{
     display: flex;
     flex-direction: row;
     
-    gap: 10px;
-    margin-left: 90px;
+    gap: 1%;
+    margin-left: 5%;
     
     color: #000;
     font-family: Silkscreen;
-    font-size: 15px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
 #ongoing, #completed, #missed{
-    width: 154px;
-    height: 54px;
+    width: 11%;
+    height: 5%;
     flex-shrink: 0;
     background: #50A2A7;
     border-radius: 14px;
-    margin-top: 30px;
+    margin-top: 2%;
 }
 
 button{
-    width: 215px;
-    height: 61px; 
+    width: 15%;
+    height: 13%; 
 
-    right: 150px;
+    /* right: 30%; */
     border-radius: 14px;
     border-color: #50A2A7;
     background: #50A2A7;
 
-    margin-left: 1050px;
-    margin-top: 30px;
+    margin-left: 78%;
+    margin-top: 2%;
     
     color: #000;
     font-family: Silkscreen;
-    font-size: 20px;
+    font-size: 1.2rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
 .tasks{
-    margin-top: 20px;
-    margin-left: 150px;
-    width: 932px;
-    height: 69px;
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 2%;
+    margin-left: 5%;
+    width: 75%;
+    height: 15%;
     border-radius: 14px;
     background: #E4D6A7;
 }
 
 input[type="checkbox"]{
     appearance: none;
-    margin-right: 1000px;
+    margin-right: 50%;
 
-    width: 77px;
-    height: 79px;
+    width: 9%;
+    height: 110%;
 
     border-radius: 14px;
     background: #888;
 }
+
