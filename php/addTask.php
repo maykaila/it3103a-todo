@@ -1,12 +1,18 @@
 <?php
 // addTask.php
 require_once 'config.php';
+session_start();  // Start session to get logged-in user
 
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve form data from the AJAX request
-    $user_id   = 1; // Replace with your logged in user's ID
+    // Check if user is logged in
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+        exit;
+    }
+
+    $user_id   = $_SESSION['user_id'];  // Get the logged-in user's ID
     $title     = isset($_POST['title']) ? trim($_POST['title']) : '';
     $details   = isset($_POST['details']) ? trim($_POST['details']) : '';
     $note_date = isset($_POST['note_date']) ? $_POST['note_date'] : date('Y-m-d');
