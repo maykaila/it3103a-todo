@@ -31,5 +31,9 @@ header p{
 
 header > span{
     margin-top: 3.5%;
-    margin-left: 30%;
+    margin-left: 50%;
+}
+
+.material-symbols-outlined {
+    font-size: 35px;
 }

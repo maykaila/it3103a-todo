@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Familiar</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=settings_power" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=more_vert" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=power_settings_new" />
-    <link rel="stylesheet" href="stylee.css">
-    <link rel="stylesheet" href="headerCss.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
+    <link rel="stylesheet" href="styles/stylee.css">
+    <link rel="stylesheet" href="styles/headerCss.css">
 </head>
 <body>
     
@@ -19,7 +16,7 @@
         <p>Welcome, {username}</p>
 
         <span class="material-symbols-outlined">
-            settings_power
+            power_settings_new
         </span>
     </header>
 
@@ -38,42 +35,132 @@
                 </div>
 
                 <div class="inner_box">
-                    
-                    <button>
-                        <span class="material-symbols-outlined">
-                            add
-                        </span>
-                        ADD TASK
+                
+                    <!-- 1) Add an ID to the button so we can open the popup -->
+                    <button id="addTaskBtn">
+                        <span class="material-symbols-outlined">add</span>
+                        <span class="btn-text">ADD TASK</span>
                     </button>
-
-                    <div class="tasks">
-                        <input type="checkbox" name="" id="">
-                        <span class="material-symbols-outlined">
-                            more_vert
-                        </span>
-                    </div>
-
-                    <div class="popup" hidden>
-
+    
+                    <!-- 2) An empty container where tasks (or "No tasks yet") will go -->
+                    <div id="taskContainer"></div>
+    
+                    <!-- 3) Give the popup an ID; hidden by default -->
+                    <div class="popup" id="popup" hidden>
+    
                         <div id="p1">
-                            <input type="text" name="title" id="title">
-                            <input type="text" name="details" id="details">
+                            <input type="text" name="title" id="title" placeholder="Title">
                         </div>
-                    
-                        
+
                         <div id="p2">
+                            <input type="text" name="details" id="details" placeholder="Details">
+                        </div>
+                        
+                        <div id="p3">
                             <input type="date" name="date" id="date">
                             <input type="time" name="time" id="time">
                         </div>
                         
-                        <button type="button">ADD</button>
-
+                        <!-- 4) Add an ID to the ADD button so we can capture the click -->
+                        <button type="button" id="confirmAddTask">ADD</button>
                     </div>
-
                 </div>
-            </div>
+        </div>
     </center>
     
+        <!-- jQuery is used here for the AJAX request -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // In-memory list for demo purposes; you can replace this with a dynamic load from your database.
+        let tasks = [];
 
+        // References to DOM elements
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const popup = document.getElementById('popup');
+        const confirmAddTask = document.getElementById('confirmAddTask');
+        const taskContainer = document.getElementById('taskContainer');
+
+        // Render tasks or "No tasks yet" message
+        function renderTasks() {
+            taskContainer.innerHTML = '';
+            if (tasks.length === 0) {
+                const msg = document.createElement('p');
+                msg.textContent = 'No tasks yet.';
+                msg.style.marginTop = '2%';
+                msg.style.marginLeft = '5%';
+                taskContainer.appendChild(msg);
+            } else {
+                tasks.forEach((task) => {
+                    const taskDiv = document.createElement('div');
+                    taskDiv.className = 'tasks';
+                    taskDiv.innerHTML = `
+                        <input type="checkbox" />
+                        <span>${task.title}</span>
+                        <span class="material-symbols-outlined">more_vert</span>
+                    `;
+                    taskContainer.appendChild(taskDiv);
+                });
+            }
+        }
+
+        // Open the popup when the Add Task button is clicked
+        addTaskBtn.addEventListener('click', () => {
+            popup.hidden = false;
+        });
+
+        // When the ADD button inside the popup is clicked, use AJAX to add the task
+        confirmAddTask.addEventListener('click', () => {
+            const title     = $('#title').val().trim();
+            const details   = $('#details').val().trim();
+            const note_date = $('#date').val();
+            const note_time = $('#time').val();
+
+            $.ajax({
+                url: 'php/addTask.php',
+                type: 'POST',
+                data: {
+                    title: title,
+                    details: details,
+                    note_date: note_date,
+                    note_time: note_time
+                },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // Optionally update your tasks list here
+                        tasks.push({ title: title, details: details });
+                        renderTasks();
+
+                        // Clear form fields and hide popup
+                        $('#title, #details, #date, #time').val('');
+                        $('#popup').attr('hidden', true);
+                    }
+                    alert(response.message);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    alert('An error occurred while adding the task.');
+                }
+            });
+        });
+
+        document.addEventListener('click', function(event) {
+        const popup = document.getElementById('popup');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+
+        // If the popup is visible, and the clicked element is not inside the popup
+        // and not part of the addTaskBtn (or its children), then hide the popup.
+        if (
+            !popup.hidden &&
+            !popup.contains(event.target) &&
+            !addTaskBtn.contains(event.target)
+        ) {
+            popup.hidden = true;
+        }
+        });
+
+        // Initial render to display "No tasks yet."
+        renderTasks();
+    </script>
 </body>
 </html>
