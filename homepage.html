@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Familiar</title>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
     <link rel="stylesheet" href="styles/stylee.css">
     <link rel="stylesheet" href="styles/headerCss.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" />
 </head>
 <body>
     
@@ -23,20 +23,10 @@
     <center>
         <div class="outer_box">
 
-                <div class="options">
-                    <div id="ongoing"><p>ON-GOING</p></div>
-                    <div id="completed"><p>COMPLETED</p></div>
-                    <div id="missed"><p>MISSED</p></div>
-                </div>
-
-                <div class="boxes">
-                    <div class="box"></div>
-                    <div class="box"></div>
-                </div>
-
-                <div class="inner_box">
-                
-                    <!-- 1) Add an ID to the button so we can open the popup -->
+            <div class="mytabs">
+                <input type="radio" id="tabOnGoing" name="mytabs" checked="checked">
+                <label for="tabOnGoing" style="margin-left: 20px;">On Going</label>
+                <div class="tab">
                     <button id="addTaskBtn">
                         <span class="material-symbols-outlined">add</span>
                         <span class="btn-text">ADD TASK</span>
@@ -65,6 +55,54 @@
                         <button type="button" id="confirmAddTask">ADD</button>
                     </div>
                 </div>
+                
+                <input type="radio" id="tabCompleted" name="mytabs">
+                <label for="tabCompleted">Completed</label>
+                <div class="tab">
+                    <h2>Completed</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+    
+                <input type="radio" id="tabMissed" name="mytabs">
+                <label for="tabMissed">Missed</label>
+                <div class="tab">
+                    <h2>Missed</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+    
+            </div>
+
+                <!-- <div class="inner_box">
+                
+                    1) Add an ID to the button so we can open the popup
+                    <button id="addTaskBtn">
+                        <span class="material-symbols-outlined">add</span>
+                        <span class="btn-text">ADD TASK</span>
+                    </button>
+    
+                    2) An empty container where tasks (or "No tasks yet") will go
+                    <div id="taskContainer"></div>
+    
+                    3) Give the popup an ID; hidden by default
+                    <div class="popup" id="popup" hidden>
+    
+                        <div id="p1">
+                            <input type="text" name="title" id="title" placeholder="Title">
+                        </div>
+
+                        <div id="p2">
+                            <input type="text" name="details" id="details" placeholder="Details">
+                        </div>
+                        
+                        <div id="p3">
+                            <input type="date" name="date" id="date">
+                            <input type="time" name="time" id="time">
+                        </div>
+                        
+                        4) Add an ID to the ADD button so we can capture the click
+                        <button type="button" id="confirmAddTask">ADD</button>
+                    </div>
+                </div> -->
         </div>
     </center>
     
@@ -110,7 +148,13 @@
                     taskDiv.innerHTML = `
                         <input type="checkbox" />
                         <span>${task.title}</span>
-                        <span class="material-symbols-outlined">more_vert</span>
+                        <div class="settings">
+                            <span class="material-symbols-outlined">more_vert</span>
+                            <ul class="menu">
+                                <li>EDIT</li>
+                                <li>DELETE</li>
+                            </ul>
+                        </div>
                     `;
                     taskContainer.appendChild(taskDiv);
                 });
