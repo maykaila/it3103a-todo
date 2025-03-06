@@ -13,11 +13,13 @@
     
     <header>
         <img src="images used/mainCat.png" alt="black pixelated cat">
-        <p>Welcome, <span id="username">Loading...</span></p>
+        <p class="head">Welcome, <span id="username">Loading...</span></p>
 
-        <span class="material-symbols-outlined">
+        <a href="signout.html">
+            <span class="material-symbols-outlined">
             power_settings_new
-        </span>
+            </span>
+        </a>
     </header>
 
     <center>
@@ -147,7 +149,7 @@
                     taskDiv.className = 'tasks';
                     taskDiv.innerHTML = `
                         <input type="checkbox" />
-                        <span>${task.title}</span>
+                        <span class="tasksmade">${task.title}</span>
                         <div class="settings">
                             <span class="material-symbols-outlined">more_vert</span>
                             <ul class="menu">
