@@ -17,6 +17,7 @@ body{
     background: #9B2915;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
+
 /* 
 .inner_box{
     width: 92%;
@@ -70,15 +71,16 @@ body{
     text-align: center;
     max-width: 100px;
     width: 100px;
-    font-weight: bold;
-    border-radius: 26px 26px 0px 0px;
+    border-radius: 14px 14px 0px 0px;
     cursor: pointer;
     margin-left: 5px;
+    font-family: Silkscreen;
+    font-size: 16px;
 }
 
 .tab {
-    max-height: 400px; /* Set a fixed or dynamic height */
-    height: 400px;
+    max-height: 1000px; /* Set a fixed or dynamic height */
+    height: 600px;
     overflow-y: auto; /* Enables vertical scrolling when content overflows */
     padding-right: 10px; /* Prevents text from touching the scrollbar */
 }
@@ -101,7 +103,7 @@ body{
 .mytabs .tab {
     width: 100%;
     padding: 20px;
-    border-radius: 20px 0px 0px 20px;
+    border-radius: 20px 20px 20px 20px;
     background: #e9b44c;
     order: 1;
     display: none;
@@ -113,11 +115,13 @@ body{
 
 .mytabs input[type="radio"]:checked + label {
     background: #e9b44c;
+    font-weight: bold;
+    font-size: 15px;
 }
 
 #addTaskBtn{
-    width: 15%;
-    height: 13%; 
+    width: 12%;
+    height: 10%;
 
     /* right: 30%; */
     border-radius: 14px;
@@ -152,18 +156,31 @@ body{
     background: #E4D6A7;
     padding: 15px;        
 }
+
+/* .tasksmade {
+    margin-right: 60%;
+    text-align: left !important;
+} */
+
 /* 
 span.titlee {
     margin-right: 800px;
 } */
 
 input[type="checkbox"] {
-    appearance: none;
-    width: 20px;     
-    height: 20px;
-    border-radius: 4px;
-    background: #888;
+    appearance: unset;
+    width: 30px;
+    height: 30px;
+    border-style: solid;
+    border-radius: 8px;
+    border-color: #3d3d3d;
+    display: block;
     cursor: pointer;
+    transition: background 0.3s;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #50A2A7; /* Slightly darker yellow */
 }
 
 /* In your stylee.css, find your .popup rules and replace them with: */
