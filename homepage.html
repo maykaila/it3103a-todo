@@ -56,6 +56,29 @@
                         <!-- 4) Add an ID to the ADD button so we can capture the click -->
                         <button type="button" id="confirmAddTask">ADD</button>
                     </div>
+
+                    <div class="popup" id="editPopup" hidden>
+                        <input type="hidden" id="editTaskId">
+                        <div id="p1">
+                            <input type="text" id="editTitle" placeholder="Title">
+                        </div>
+                        <div id="p2">
+                            <input type="text" id="editDetails" placeholder="Details">
+                        </div>
+                        <div id="p3">
+                            <input type="date" id="editDate">
+                            <input type="time" id="editTime">
+                        </div>
+                        <button type="button" id="confirmEditTask">UPDATE</button>
+                    </div>
+
+                    <div class="popup" id="deletePopup" hidden>
+                        <p>ARE YOU SURE YOU WANT TO DELETE THIS TASK?</p>
+                        <button type="button" id="confirmDeleteTask">YES, I'M SURE</button>
+                        <button type="button" id="cancelDeleteTask">CANCEL</button>
+                    </div>
+                    
+
                 </div>
                 
                 <input type="radio" id="tabCompleted" name="mytabs">
@@ -73,38 +96,6 @@
                 </div>
     
             </div>
-
-                <!-- <div class="inner_box">
-                
-                    1) Add an ID to the button so we can open the popup
-                    <button id="addTaskBtn">
-                        <span class="material-symbols-outlined">add</span>
-                        <span class="btn-text">ADD TASK</span>
-                    </button>
-    
-                    2) An empty container where tasks (or "No tasks yet") will go
-                    <div id="taskContainer"></div>
-    
-                    3) Give the popup an ID; hidden by default
-                    <div class="popup" id="popup" hidden>
-    
-                        <div id="p1">
-                            <input type="text" name="title" id="title" placeholder="Title">
-                        </div>
-
-                        <div id="p2">
-                            <input type="text" name="details" id="details" placeholder="Details">
-                        </div>
-                        
-                        <div id="p3">
-                            <input type="date" name="date" id="date">
-                            <input type="time" name="time" id="time">
-                        </div>
-                        
-                        4) Add an ID to the ADD button so we can capture the click
-                        <button type="button" id="confirmAddTask">ADD</button>
-                    </div>
-                </div> -->
         </div>
     </center>
     
@@ -119,6 +110,8 @@
         const popup = document.getElementById('popup');
         const confirmAddTask = document.getElementById('confirmAddTask');
         const taskContainer = document.getElementById('taskContainer');
+
+        let deleteTaskId = null; // Store task ID to delete
 
         $(document).ready(function () {
             $.ajax({
@@ -153,8 +146,8 @@
                         <div class="settings">
                             <span class="material-symbols-outlined">more_vert</span>
                             <ul class="menu">
-                                <li>EDIT</li>
-                                <li>DELETE</li>
+                                <li  class="editTaskBtn" data-id="${task.id}" data-title="${task.title}" data-details="${task.details}" data-date="${task.note_date}" data-time="${task.note_time}">EDIT</li>
+                                <li class="deleteTaskBtn" data-id="${task.id}">DELETE</li>
                             </ul>
                         </div>
                     `;
@@ -163,7 +156,7 @@
             }
         }
 
-                // Function to fetch tasks from the database on page load
+        // Function to fetch tasks from the database on page load
         function fetchTasks() {
             $.ajax({
                 url: 'php/fetchTask.php',
@@ -241,6 +234,140 @@
             popup.hidden = true;
         }
         });
+
+        //makita ang edit & delete menu when clicked
+        $(document).on('click', '.material-symbols-outlined', function (event) {
+            event.stopPropagation(); // Prevent closing when clicking the icon
+
+            let menu = $(this).siblings('.menu');
+            
+            // Hide other open menus
+            $('.menu').not(menu).hide();
+            
+            // Toggle the clicked menu
+            menu.toggle();
+        });
+
+        // Hide menu when clicking outside
+        $(document).on('click', function () {
+            $('.menu').hide();
+        });
+
+        $(document).on('click', '.editTaskBtn', function () {
+            const taskId = $(this).data('id');
+            const taskTitle = $(this).data('title');
+            const taskDetails = $(this).data('details');
+            let taskDate = $(this).data('date');
+            let taskTime = $(this).data('time');
+
+            // Ensure the date is formatted correctly for the input field
+            if (taskDate) {
+                taskDate = new Date(taskDate).toISOString().split('T')[0]; // Format as YYYY-MM-DD
+            } else {
+                taskDate = ''; // Set empty if no date
+            }
+
+            // Ensure the time is formatted correctly for the input field
+            if (taskTime) {
+                let timeParts = taskTime.split(':'); // Extract hours and minutes
+                taskTime = timeParts[0] + ':' + timeParts[1]; // Format as HH:MM
+            } else {
+                taskTime = ''; // Set empty if no time
+            }
+
+            $('#editTaskId').val(taskId);
+            $('#editTitle').val(taskTitle);
+            $('#editDetails').val(taskDetails);
+            $('#editDate').val(taskDate);
+            $('#editTime').val(taskTime);
+            
+            $('#editPopup').removeAttr('hidden').css('display', 'block');
+        });
+
+
+        $('#confirmEditTask').on('click', function () {
+            const taskId = $('#editTaskId').val();
+            const title = $('#editTitle').val().trim();
+            const details = $('#editDetails').val().trim();
+            const note_date = $('#editDate').val();
+            const note_time = $('#editTime').val();
+
+            $.ajax({
+                url: 'php/editTask.php',
+                type: 'POST',
+                data: {
+                    task_id: taskId,
+                    title: title,
+                    details: details,
+                    note_date: note_date,
+                    note_time: note_time
+                },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        // Refresh task list
+                        fetchTasks();
+                        // Hide the edit popup
+                        $('#editPopup').attr('hidden', true).css('display', 'none');
+                        // Clear the input fields
+                        $('#editTaskId, #editTitle, #editDetails, #editDate, #editTime').val('');
+                    }
+                    alert(response.message);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                    alert('An error occurred while updating the task.');
+                }
+            });
+        });
+
+        $(document).on('click', function (event) {
+            const editPopup = $('#editPopup');
+
+            // Check if the popup is visible and the clicked element is NOT inside the popup or edit button
+            if (
+                editPopup.is(':visible') &&
+                !editPopup.is(event.target) &&
+                editPopup.has(event.target).length === 0 &&
+                !$(event.target).hasClass('editTaskBtn')
+            ) {
+                editPopup.attr('hidden', true).css('display', 'none');
+            }
+        });
+
+        // Open the delete when clicking DELETE
+        $(document).on('click', '.deleteTaskBtn', function () {
+            deleteTaskId = $(this).data('id'); // Get task ID
+            $('#deletePopup').removeAttr('hidden').css('display', 'block');
+        });
+
+        // Close delete popup when clicking CANCEL
+        $('#cancelDeleteTask').on('click', function () {
+            $('#deletePopup').attr('hidden', true).css('display', 'none');
+        });
+
+        $('#confirmDeleteTask').on('click', function () {
+            if (!deleteTaskId) return;
+
+            $.ajax({
+                url: 'php/deleteTask.php',
+                type: 'POST',
+                data: { task_id: deleteTaskId },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.status === 'success') {
+                        fetchTasks(); // Refresh the task list
+                        $('#deletePopup').attr('hidden', true).css('display', 'none');
+                    }
+                    alert(response.message);
+                },
+                error: function (xhr, status, error) {
+                    console.error(error);
+                    alert('An error occurred while deleting the task.');
+                }
+            });
+        });
+
 
         // Initial render to display "No tasks yet."
         renderTasks();
