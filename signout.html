@@ -21,11 +21,30 @@
           <img src="images used/mainCat.png" alt="black pixelated cat">
           <p class="p1">ARE YOU SURE, HUMAN?</p>
 
-          <button class="b1" type="submit">Sign Out</button>
+          <button class="b1" type="submit" id="signOutBtn">Sign Out</button>
         </div>
       </div>
     </div>
   </center>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#signOutBtn').on('click', function () {
+      $.ajax({
+        url: 'php/signout.php',
+        type: 'POST',
+        success: function (response) {
+          window.location.href = 'signin.html'; // Redirect to login page after logout
+        },
+        error: function () {
+          alert('Error signing out. Please try again.');
+        }
+      });
+    });
+  });
+</script>
+
   
 </body>
 </html>
