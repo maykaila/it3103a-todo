@@ -222,6 +222,19 @@ input[type="checkbox"]:checked {
     margin-bottom: 20px;
 }
 
+.popup p {
+    color: white;
+    font-family: Silkscreen;
+    margin: 10px;
+}
+
+.popup button {
+    background-color: #50A2A7;
+    padding: 10px 20px;
+    border-radius: 14px;
+    border-color: #50A2A7;
+    cursor: pointer;
+}
 
 /* for he edit and delete */
 .settings span {
@@ -246,10 +259,10 @@ input[type="checkbox"]:checked {
     transition: transform 0.2s ease;
     transform-origin: bottom left;
 }
-
+/* 
 .settings:hover .menu {
     transform: scale(1);
-}
+} */
 
 .settings .menu li {
     display: flex;
