@@ -79,7 +79,7 @@ body{
 }
 
 .tab {
-    max-height: 1000px; /* Set a fixed or dynamic height */
+    max-height: 400px; /* Set a fixed or dynamic height */
     height: 600px;
     overflow-y: auto; /* Enables vertical scrolling when content overflows */
     padding-right: 10px; /* Prevents text from touching the scrollbar */
@@ -120,8 +120,8 @@ body{
 }
 
 #addTaskBtn{
-    width: 12%;
-    height: 10%;
+    width: 20%;
+    height: 12%;
 
     /* right: 30%; */
     border-radius: 14px;
