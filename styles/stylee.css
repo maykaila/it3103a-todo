@@ -79,7 +79,7 @@ body{
 }
 
 .tab {
-    max-height: 1000px; /* Set a fixed or dynamic height */
+    max-height: 400px; /* Set a fixed or dynamic height */
     height: 600px;
     overflow-y: auto; /* Enables vertical scrolling when content overflows */
     padding-right: 10px; /* Prevents text from touching the scrollbar */
@@ -120,8 +120,8 @@ body{
 }
 
 #addTaskBtn{
-    width: 12%;
-    height: 10%;
+    width: 20%;
+    height: 12%;
 
     /* right: 30%; */
     border-radius: 14px;
@@ -156,16 +156,6 @@ body{
     background: #E4D6A7;
     padding: 15px;        
 }
-
-/* .tasksmade {
-    margin-right: 60%;
-    text-align: left !important;
-} */
-
-/* 
-span.titlee {
-    margin-right: 800px;
-} */
 
 input[type="checkbox"] {
     appearance: unset;
@@ -274,4 +264,63 @@ input[type="checkbox"]:checked {
     list-style: none;
     height: 25px;
     color: white;
+}
+
+/* random things (complete and missing empty boxes) */
+#completeEmpty img{
+    width: 352px;
+    height: 180px;
+    flex-shrink: 0;
+    aspect-ratio: 88/45;
+    margin-top: 3%;
+}
+
+#completeEmpty p{
+    width: 488px;
+    color: #000;
+    font-family: Silkscreen;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    
+}
+
+#missedEmpty img{
+    width: 228px;
+    height: 228px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    margin-top: 1%;
+    
+}
+
+#missedEmpty p{
+    width: 300px;
+    color: #000;
+    text-align: center;
+    font-family: Silkscreen;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#ongoingEmpty img{
+    width: 218px;
+    height: 218px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+}
+
+#ongoingEmpty p{
+    width: 388px;
+    color: #000;
+    text-align: center;
+    font-family: Silkscreen;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
