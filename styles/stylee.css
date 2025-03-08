@@ -157,16 +157,6 @@ body{
     padding: 15px;        
 }
 
-/* .tasksmade {
-    margin-right: 60%;
-    text-align: left !important;
-} */
-
-/* 
-span.titlee {
-    margin-right: 800px;
-} */
-
 input[type="checkbox"] {
     appearance: unset;
     width: 30px;
@@ -274,4 +264,43 @@ input[type="checkbox"]:checked {
     list-style: none;
     height: 25px;
     color: white;
+}
+
+/* random things (complete and missing empty boxes) */
+#completeEmpty img{
+    width: 228px;
+    height: 228px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
+    margin-top: 1%;
+}
+
+#completeEmpty p{
+    width: 300px;
+    color: #000;
+    text-align: center;
+    font-family: Silkscreen;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+#missedEmpty img{
+    width: 352px;
+    height: 180px;
+    flex-shrink: 0;
+    aspect-ratio: 88/45;
+    margin-top: 3%;
+}
+
+#missedEmpty p{
+    width: 488px;
+    color: #000;
+    font-family: Silkscreen;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
 }
