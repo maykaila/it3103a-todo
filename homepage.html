@@ -158,7 +158,7 @@
                             <input type="checkbox" class="task-checkbox" data-id="${task.id}" />
                             <span class="tasksmade">${task.title}</span>
                             <div class="settings">
-                                <span class="material-symbols-outlined">more_vert</span>
+                                <span class="material-symbols-outlined menu-toggle">more_vert</span>
                                 <ul class="menu">
                                     <li class="editTaskBtn" data-id="${task.id}" data-title="${task.title}" data-details="${task.details}" data-date="${task.note_date}" data-time="${task.note_time}">EDIT</li>
                                     <li class="deleteTaskBtn" data-id="${task.id}">DELETE</li>
@@ -167,6 +167,8 @@
                         `;
                         ongoingContainer.appendChild(taskDiv);
                     });
+
+                    attachMenuEvent(); // Attach events after rendering tasks
 
                     // Add event listeners for checkboxes
                     document.querySelectorAll('.task-checkbox').forEach(checkbox => {
@@ -320,23 +322,32 @@
         }
         });
 
-        //makita ang edit & delete menu when clicked
-        $(document).on('click', '.material-symbols-outlined', function (event) {
-            event.stopPropagation(); // Prevent closing when clicking the icon
 
-            let menu = $(this).siblings('.menu');
-            
-            // Hide other open menus
-            $('.menu').not(menu).hide();
-            
-            // Toggle the clicked menu
-            menu.toggle();
-        });
 
-        // Hide menu when clicking outside
-        $(document).on('click', function () {
-            $('.menu').hide();
-        });
+        function attachMenuEvent() {
+            console.log("Reattaching event listeners..."); // Debugging
+
+            $('.menu-toggle').off('click').on('click', function (event) {
+                event.stopPropagation(); // Prevent menu from closing immediately
+
+                let menu = $(this).siblings('.menu');
+                console.log("Clicked menu:", menu); // Debugging
+
+                // Hide all other menus first
+                $('.menu').not(menu).removeClass('show');
+
+                // Toggle visibility of the clicked menu
+                menu.toggleClass('show');
+            });
+
+            // Hide menu when clicking outside
+            $(document).on('click', function (event) {
+                if (!$(event.target).closest('.settings').length) {
+                    $('.menu').removeClass('show');
+                }
+            });
+        }
+
 
         $(document).on('click', '.editTaskBtn', function () {
             const taskId = $(this).data('id');
