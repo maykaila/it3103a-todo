@@ -85,15 +85,16 @@
                 <label for="tabCompleted">Completed</label>
                 <div class="tab">
                     <h2>Completed</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <!-- Container for completed tasks -->
+                    <div id="completedTaskContainer"></div>
                 </div>
-    
+
                 <input type="radio" id="tabMissed" name="mytabs">
                 <label for="tabMissed">Missed</label>
                 <div class="tab">
                     <h2>Missed</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
+                    <div id="missedTaskContainer"></div>
+                </div>                
     
             </div>
         </div>
@@ -127,34 +128,118 @@
             });
         });
 
-        // Render tasks or "No tasks yet" message
         function renderTasks() {
-            taskContainer.innerHTML = '';
-            if (tasks.length === 0) {
+            const ongoingContainer = document.getElementById('taskContainer');
+            const completedContainer = document.getElementById('completedTaskContainer');
+            const missedContainer = document.getElementById('missedTaskContainer');
+
+            // Clear previous contents
+            ongoingContainer.innerHTML = '';
+            completedContainer.innerHTML = '';
+            missedContainer.innerHTML = '';
+
+            // Filter tasks based on status
+            const ongoingTasks = tasks.filter(task => task.status === 'on-going');
+            const completedTasks = tasks.filter(task => task.status === 'completed');
+            const missedTasks   = tasks.filter(task => task.status === 'missed');
+
+            // Render on-going tasks
+            if (ongoingTasks.length === 0) {
                 const msg = document.createElement('p');
                 msg.textContent = 'No tasks yet.';
                 msg.style.marginTop = '2%';
                 msg.style.marginLeft = '5%';
-                taskContainer.appendChild(msg);
+                ongoingContainer.appendChild(msg);
             } else {
-                tasks.forEach((task) => {
+                    ongoingTasks.forEach((task) => {
+                        const taskDiv = document.createElement('div');
+                        taskDiv.className = 'tasks';
+                        taskDiv.innerHTML = `
+                            <input type="checkbox" class="task-checkbox" data-id="${task.id}" />
+                            <span class="tasksmade">${task.title}</span>
+                            <div class="settings">
+                                <span class="material-symbols-outlined">more_vert</span>
+                                <ul class="menu">
+                                    <li class="editTaskBtn" data-id="${task.id}" data-title="${task.title}" data-details="${task.details}" data-date="${task.note_date}" data-time="${task.note_time}">EDIT</li>
+                                    <li class="deleteTaskBtn" data-id="${task.id}">DELETE</li>
+                                </ul>
+                            </div>
+                        `;
+                        ongoingContainer.appendChild(taskDiv);
+                    });
+
+                    // Add event listeners for checkboxes
+                    document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+                        checkbox.addEventListener('change', function () {
+                            if (this.checked) {
+                                moveToCompleted(this.dataset.id);
+                            }
+                        });
+                    });
+            }
+
+            // Render completed tasks
+            if (completedTasks.length === 0) {
+                const msg = document.createElement('p');
+                msg.textContent = 'No completed tasks yet.';
+                msg.style.marginTop = '2%';
+                msg.style.marginLeft = '5%';
+                completedContainer.appendChild(msg);
+            } else {
+                completedTasks.forEach((task) => {
                     const taskDiv = document.createElement('div');
                     taskDiv.className = 'tasks';
                     taskDiv.innerHTML = `
-                        <input type="checkbox" />
                         <span class="tasksmade">${task.title}</span>
-                        <div class="settings">
-                            <span class="material-symbols-outlined">more_vert</span>
-                            <ul class="menu">
-                                <li  class="editTaskBtn" data-id="${task.id}" data-title="${task.title}" data-details="${task.details}" data-date="${task.note_date}" data-time="${task.note_time}">EDIT</li>
-                                <li class="deleteTaskBtn" data-id="${task.id}">DELETE</li>
-                            </ul>
-                        </div>
                     `;
-                    taskContainer.appendChild(taskDiv);
+                    completedContainer.appendChild(taskDiv);
                 });
             }
+
+            // Render missed tasks
+            if (missedTasks.length === 0) {
+                const msg = document.createElement('p');
+                msg.textContent = 'No missed tasks yet.';
+                msg.style.marginTop = '2%';
+                msg.style.marginLeft = '5%';
+                missedContainer.appendChild(msg);
+            } else {
+                missedTasks.forEach((task) => {
+                    const taskDiv = document.createElement('div');
+                    taskDiv.className = 'tasks';
+                    taskDiv.innerHTML = `
+                        <span class="tasksmade">${task.title}</span>
+                    `;
+                    missedContainer.appendChild(taskDiv);
+                });
+            }
+            // Add event listeners for checkboxes
+            document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+                        checkbox.addEventListener('change', function () {
+                            if (this.checked) {
+                                moveToCompleted(this.dataset.id);
+                            }
+                        });
+            });
         }
+
+        function moveToCompleted(taskId) {
+            $.ajax({
+                url: 'php/updateTaskStatus.php',
+                type: 'POST',
+                data: { task_id: taskId, status: 'completed' },
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status === 'success') {
+                        fetchTasks();
+                    }
+                },
+                error: function(error) {
+                    console.error("Error updating task status:", error);
+                }
+            });
+        }
+
 
         // Function to fetch tasks from the database on page load
         function fetchTasks() {
