@@ -226,6 +226,7 @@ input[type="checkbox"]:checked {
     cursor: pointer;
 }
 
+
 /* for he edit and delete */
 .settings span {
     cursor: pointer;
@@ -243,6 +244,7 @@ input[type="checkbox"]:checked {
     position: absolute;
     right: 0;
     background: black;
+    border-radius: 5px;
     color: white;
     bottom: -40px; /* Adjust positioning if needed */
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
