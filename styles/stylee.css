@@ -268,14 +268,35 @@ input[type="checkbox"]:checked {
 
 /* random things (complete and missing empty boxes) */
 #completeEmpty img{
+    width: 352px;
+    height: 180px;
+    flex-shrink: 0;
+    aspect-ratio: 88/45;
+    margin-top: 3%;
+}
+
+#completeEmpty p{
+    width: 488px;
+    color: #000;
+    font-family: Silkscreen;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    
+}
+
+#missedEmpty img{
     width: 228px;
     height: 228px;
     flex-shrink: 0;
     aspect-ratio: 1/1;
     margin-top: 1%;
+    
 }
 
-#completeEmpty p{
+#missedEmpty p{
     width: 300px;
     color: #000;
     text-align: center;
@@ -286,21 +307,20 @@ input[type="checkbox"]:checked {
     line-height: normal;
 }
 
-#missedEmpty img{
-    width: 352px;
-    height: 180px;
+#ongoingEmpty img{
+    width: 218px;
+    height: 218px;
     flex-shrink: 0;
-    aspect-ratio: 88/45;
-    margin-top: 3%;
+    aspect-ratio: 1/1;
 }
 
-#missedEmpty p{
-    width: 488px;
+#ongoingEmpty p{
+    width: 388px;
     color: #000;
+    text-align: center;
     font-family: Silkscreen;
     font-size: 25px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    text-align: center;
 }

@@ -86,8 +86,8 @@
                 <div class="tab">
                     <div id="completeEmpty">
                         <center>
-                            <img src="./images used/secondCat.png" alt="ascii cat">
-                            <p>Yippee !! You can rest</p>
+                            <img src="./images used/completedCat.png" alt="ascii fairy cat">
+                            <p>may the spirit of productivity reach you</p>
                         </center>
                     </div>
                     <!-- <h2>Completed</h2>
@@ -99,8 +99,8 @@
                 <div class="tab">
                     <div id="missedEmpty">
                         <center>
-                            <img src="./images used/completedCat.png" alt="ascii fairy cat">
-                            <p>may the spirit of productivity reach you</p>
+                            <img src="./images used/secondCat.png" alt="ascii fairy cat">
+                            <p>You're doing great, human!</p>
                         </center>
                     </div>
                     <!-- <h2>Missed</h2>
@@ -143,11 +143,23 @@
         function renderTasks() {
             taskContainer.innerHTML = '';
             if (tasks.length === 0) {
-                const msg = document.createElement('p');
-                msg.textContent = 'No tasks yet.';
-                msg.style.marginTop = '2%';
-                msg.style.marginLeft = '5%';
-                taskContainer.appendChild(msg);
+                const msgContainer = document.createElement('div');
+                msgContainer.id = 'ongoingEmpty';
+
+                const centerElement = document.createElement('center');
+
+                const imgElement = document.createElement('img');
+                imgElement.src = './images used/secondCat.png';
+                imgElement.alt = 'ascii fairy cat';
+
+                const textElement = document.createElement('p');
+                textElement.textContent = "yippee! you can rest!";
+
+                centerElement.appendChild(imgElement);
+                centerElement.appendChild(textElement);
+                msgContainer.appendChild(centerElement);
+                
+                taskContainer.appendChild(msgContainer);
             } else {
                 tasks.forEach((task) => {
                     const taskDiv = document.createElement('div');
