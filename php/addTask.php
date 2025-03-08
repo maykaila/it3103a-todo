@@ -1,5 +1,4 @@
 <?php
-// addTask.php
 require_once 'config.php';
 session_start();  // Start session to get logged-in user
 
@@ -19,8 +18,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $note_time = isset($_POST['note_time']) ? $_POST['note_time'] : date('H:i:s');
 
     if (!empty($title)) {
-        // Prepare and execute the SQL statement
-        $sql = "INSERT INTO notes (user_id, note_date, note_time, title, details) VALUES (?, ?, ?, ?, ?)";
+        // Insert task with status field (default: 'on-going')
+        $sql = "INSERT INTO notes (user_id, note_date, note_time, title, details, status) 
+                VALUES (?, ?, ?, ?, ?, 'on-going')";
         $stmt = $pdo->prepare($sql);
         if ($stmt->execute([$user_id, $note_date, $note_time, $title, $details])) {
             echo json_encode(['status' => 'success', 'message' => 'Task added successfully.']);
