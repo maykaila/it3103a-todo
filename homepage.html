@@ -84,7 +84,7 @@
                 <input type="radio" id="tabCompleted" name="mytabs">
                 <label for="tabCompleted">Completed</label>
                 <div class="tab">
-                    <h2>Completed</h2>
+                    <!-- <h2>Completed</h2> -->
                     <!-- Container for completed tasks -->
                     <div id="completedTaskContainer"></div>
                 </div>
@@ -92,7 +92,7 @@
                 <input type="radio" id="tabMissed" name="mytabs">
                 <label for="tabMissed">Missed</label>
                 <div class="tab">
-                    <h2>Missed</h2>
+                    <!-- <h2>Missed</h2> -->
                     <div id="missedTaskContainer"></div>
                 </div>                
     
@@ -145,11 +145,23 @@
 
             // Render on-going tasks
             if (ongoingTasks.length === 0) {
-                const msg = document.createElement('p');
-                msg.textContent = 'No tasks yet.';
-                msg.style.marginTop = '2%';
-                msg.style.marginLeft = '5%';
-                ongoingContainer.appendChild(msg);
+                const msgContainer = document.createElement('div');
+                msgContainer.id = 'ongoingEmpty';
+
+                const centerElement = document.createElement('center');
+
+                const imgElement = document.createElement('img');
+                imgElement.src = './images used/secondCat.png';
+                imgElement.alt = 'ascii fairy cat';
+
+                const textElement = document.createElement('p');
+                textElement.textContent = "yippee! you can rest!";
+
+                centerElement.appendChild(imgElement);
+                centerElement.appendChild(textElement);
+                msgContainer.appendChild(centerElement);
+                
+                taskContainer.appendChild(msgContainer);
             } else {
                     ongoingTasks.forEach((task) => {
                         const taskDiv = document.createElement('div');
@@ -180,11 +192,23 @@
 
             // Render completed tasks
             if (completedTasks.length === 0) {
-                const msg = document.createElement('p');
-                msg.textContent = 'No completed tasks yet.';
-                msg.style.marginTop = '2%';
-                msg.style.marginLeft = '5%';
-                completedContainer.appendChild(msg);
+                const msgContainer = document.createElement('div');
+                msgContainer.id = 'completeEmpty';
+
+                const centerElement = document.createElement('center');
+
+                const imgElement = document.createElement('img');
+                imgElement.src = './images used/completedCat.png';  // Update the path if needed
+                imgElement.alt = 'ascii fairy cat';
+
+                const textElement = document.createElement('p');
+                textElement.textContent = "May the spirit of productivity reach you";
+
+                centerElement.appendChild(imgElement);
+                centerElement.appendChild(textElement);
+                msgContainer.appendChild(centerElement);
+
+                completedContainer.appendChild(msgContainer);
             } else {
                 completedTasks.forEach((task) => {
                     const taskDiv = document.createElement('div');
@@ -198,11 +222,23 @@
 
             // Render missed tasks
             if (missedTasks.length === 0) {
-                const msg = document.createElement('p');
-                msg.textContent = 'No missed tasks yet.';
-                msg.style.marginTop = '2%';
-                msg.style.marginLeft = '5%';
-                missedContainer.appendChild(msg);
+                const msgContainer = document.createElement('div');
+                msgContainer.id = 'missedEmpty';
+
+                const centerElement = document.createElement('center');
+
+                const imgElement = document.createElement('img');
+                imgElement.src = './images used/secondCat.png';  // Update the path if needed
+                imgElement.alt = 'ascii fairy cat';
+
+                const textElement = document.createElement('p');
+                textElement.textContent = "You're doing great, human!";
+
+                centerElement.appendChild(imgElement);
+                centerElement.appendChild(textElement);
+                msgContainer.appendChild(centerElement);
+
+                missedContainer.appendChild(msgContainer);
             } else {
                 missedTasks.forEach((task) => {
                     const taskDiv = document.createElement('div');
