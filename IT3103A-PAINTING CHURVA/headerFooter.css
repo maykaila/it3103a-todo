@@ -7,11 +7,13 @@ header {
     display: flex;
     flex-direction: row;
     background-color: white;
+    align-items: center;
     padding: 10px 80px 10px 30px;
     justify-content: space-between;
+    font-size: 25px;
 }
 
-.logoName {
+/* .logoName {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -20,12 +22,12 @@ header {
     width: 100%;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 20px;
-}
-
+} */
+/* 
 .logo {
     background-color: red;
     padding: 20px;
-}
+} */
 
 .group {
     max-width: 120px;
@@ -33,6 +35,10 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+.group i {
+    font-size: 40px;
+    cursor: pointer;
 }
 
 .mainNav {
