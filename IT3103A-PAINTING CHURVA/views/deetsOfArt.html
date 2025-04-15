@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chromatica | Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/IT3103A-PAINTING CHURVA/styles/headerFooter.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
+        <div class="group">
+            <div class="account">
+                <i class='bx bx-user-circle' id="accountIcon"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
+                </div>
+            </div>
+            
+        <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
+        </div>
+    </header>
+    <nav class="mainNav">
+        <a href="">Paintings</a>
+        <a href="">Drawings</a>
+        <a href="">Prints</a>
+    </nav>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container my-4">
+        <h2 class="fw-bold">Babae Nga Ga Tahi</h2>
+        <p class="text-muted">Maykaila Arda</p>
+        <div class="row">
+            <!-- Left Column: Image -->
+            <div class="col-md-6">
+              <img 
+                src="/IT3103A-PAINTING CHURVA/images/abstract.jpg" 
+                alt="Babae Nga Ga Tahi" 
+                class="img-fluid w-50" 
+                style="border: 1px solid #ccc; padding: 5px;"
+              >
+            </div>
+      
+            <!-- Right Column: Tabs for About and Details -->
+            <div class="col-md-6">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" id="artworkTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" 
+                            type="button" role="tab" aria-controls="about" aria-selected="true">
+                    ABOUT THE ARTWORK
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" 
+                            type="button" role="tab" aria-controls="details" aria-selected="false">
+                    DETAILS AND DIMENSIONS
+                    </button>
+                </li>
+                </ul>
+        
+                <!-- Tab content -->
+                <div class="tab-content p-3 border border-top-0" id="artworkTabContent">
+                <!-- About Tab Pane -->
+                <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                    <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                    nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <ul class="list-unstyled">
+                    <li><strong>Artist:</strong> Maykaila Arda</li>
+                    <li><strong>Year Created:</strong> 2025</li>
+                    <li><strong>Subject:</strong> Woman</li>
+                    <li><strong>Price:</strong> Php 7,000</li>
+                    </ul>
+                </div>
+                <!-- Details Tab Pane -->
+                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+                    <ul class="list-unstyled">
+                        <li><strong>Size:</strong> 76.2 W x 76.2 H x 5.1 D cm</li>
+                        <li><strong>Medium:</strong> Painting, Oil on Canvas</li>
+                        <li><strong>Frame:</strong> Not Framed</li>
+                        <li><strong>Authenticity:</strong> Certificate is Included</li>
+                        <li><strong>Packaging:</strong> Ships in a Box</li>
+                        <li><strong>Ready to Hang:</strong> Yes</li>
+                    </ul>
+                </div>
+                </div>
+                
+                <!-- Pricing & Add to Cart Button -->
+                <h5 class="fw-bold mt-3 mb-3">₱7,000</h5>
+                <button class="btn btn-danger">ADD TO CART</button>
+            </div>
+          </div>
+
+        <div class="row mt-5 p-4 shadow-sm">
+            <div class="media">
+                <img class="mr-3" src="..." alt="Profile">
+                <div class="media-body">
+                  <h5 class="mt-0">Maykaila Arda</h5>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
+                  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+                  nisi ut aliquip ex ea commodo consequat.      
+              </div>
+        </div>
+    </div>
+   
+    
+<footer>
+    <h3>CHROMATICA</h3>
+    <p>"Chromatica is your ultimate destination for discovering and purchasing stunning digital art. Whether you're an artist looking to showcase your work or an art enthusiast searching for unique pieces, our platform connects creativity with passion. Explore, create, and collect — all in one place!"</p>
+</footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/IT3103A-PAINTING CHURVA/scripts/homepage.js"></script>
+</body>
+</html>
