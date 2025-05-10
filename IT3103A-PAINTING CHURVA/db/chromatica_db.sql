@@ -8,24 +8,13 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-); 
-
-CREATE TABLE IF NOT EXISTS payment (
-    payment_id INT AUTO_INCREMENT PRIMARY KEY,
-    order_id INT NOT NULL,
-    payment_status ENUM('pending', 'completed', 'failed') NOT NULL,
-    date_of_payment TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FORIEGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS orders (
-    order_id INT AUTO_INCREMENT PRIMARY KEY,
-    artwork_id INT NOT NULL,
-    user_id INT NOT NULL,
-    order_status ENUM('pending', 'completed', 'cancelled') NOT NULL,
-    date_of_order TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE
-    FOREIGN KEY (artwork_id) REFERENCES artworks(artwork_id) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE IF NOT EXISTS artists (
+    artist_id INT AUTO_INCREMENT PRIMARY KEY,
+    artist_name VARCHAR(100) NOT NULL,
+    artist_description TEXT,
+    profile_picture VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS artworks (
@@ -44,12 +33,23 @@ CREATE TABLE IF NOT EXISTS artworks (
     packaging VARCHAR(100),
     ready_to_hang BOOLEAN DEFAULT FALSE,
     category VARCHAR(100),
-    FORIEGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS artists (
-    artist_id INT AUTO_INCREMENT PRIMARY KEY,
-    artist_name VARCHAR(100) NOT NULL,
-    artist_description TEXT,
-    profile_picture VARCHAR(255)
+CREATE TABLE IF NOT EXISTS orders (
+    order_id INT AUTO_INCREMENT PRIMARY KEY,
+    artwork_id INT NOT NULL,
+    user_id INT NOT NULL,
+    order_status ENUM('pending', 'completed', 'cancelled') NOT NULL,
+    date_of_order TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (artwork_id) REFERENCES artworks(artwork_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS payment (
+    payment_id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    payment_status ENUM('pending', 'completed', 'failed') NOT NULL,
+    date_of_payment TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE ON UPDATE CASCADE
 );

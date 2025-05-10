@@ -2,39 +2,51 @@
 session_start();
 require_once 'config.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header('Content-Type: application/json');
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Collect and sanitize input
-    $firstname = trim($_POST['firstname']);
-    $lastname  = trim($_POST['lastname']);
-    $email     = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
-    $password  = $_POST['password'];
+    $firstname = trim($_POST['firstname'] ?? '');
+    $lastname = trim($_POST['lastname'] ?? '');
+    $email = filter_var(trim($_POST['email'] ?? ''), FILTER_VALIDATE_EMAIL);
+    $password = $_POST['password'] ?? '';
 
-    if (!$email) {
-        die('Invalid email address.');
+    // Validate inputs
+    if (!$firstname || !$lastname || !$email || !$password) {
+        echo json_encode(['status' => 'error', 'message' => 'All fields are required.']);
+        exit;
     }
+
     if (strlen($password) < 6) {
-        die('Password must be at least 6 characters long.');
+        echo json_encode(['status' => 'error', 'message' => 'Password must be at least 6 characters.']);
+        exit;
     }
 
-    // Check if email already exists
-    $stmt = $pdo->prepare('SELECT id FROM users WHERE email = ?');
-    $stmt->execute([$email]);
-    if ($stmt->fetch()) {
-        die('Email is already registered.');
-    }
+    try {
+        // Check if email already exists
+        $check = $pdo->prepare("SELECT user_id FROM users WHERE email = ?");
+        $check->execute([$email]);
+        if ($check->fetch()) {
+            echo json_encode(['status' => 'error', 'message' => 'Email is already registered.']);
+            exit;
+        }
 
-    // Hash password
-    $hash = password_hash($password, PASSWORD_DEFAULT);
+        // Insert user
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $pdo->prepare("INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$firstname, $lastname, $email, $passwordHash]);
 
-    // Insert new user
-    $stmt = $pdo->prepare('INSERT INTO users (firstname, lastname, email, password) VALUES (?, ?, ?, ?)');
-    if ($stmt->execute([$firstname, $lastname, $email, $hash])) {
         $_SESSION['user_id'] = $pdo->lastInsertId();
         $_SESSION['user_name'] = $firstname;
-        header('Location: homepage.html');
-        exit;
-    } else {
-        die('Registration failed. Please try again.');
+
+        echo json_encode(['status' => 'success', 'message' => 'Registration successful.']);
+    } catch (PDOException $e) {
+        echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $e->getMessage()]);
     }
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request.']);
 }
 ?>
