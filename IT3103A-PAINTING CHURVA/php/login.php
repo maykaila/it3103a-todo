@@ -10,16 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Invalid email address.');
     }
 
-    // Fetch user
-    $stmt = $pdo->prepare('SELECT id, firstname, password FROM users WHERE email = ?');
+    $stmt = $pdo->prepare('SELECT user_id, firstname, password FROM users WHERE email = ?');
     $stmt->execute([$email]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
-        // Credentials valid
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['user_name'] = $user['firstname'];
-        header('Location: homepage.html');
+        header('Location: ../homepage.html'); // Adjust as needed
         exit;
     } else {
         die('Incorrect email or password.');

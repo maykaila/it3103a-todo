@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$db   = 'chromatica';        // Your database name
+$db   = 'chromatica_db';        // Your database name
 $user = 'root';    // Your database username
 $pass = '';    // Your database password
 $charset = 'utf8mb4';
