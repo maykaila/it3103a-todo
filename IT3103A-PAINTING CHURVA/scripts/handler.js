@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (result.status === "success") {
                     alert(result.message);
-                    window.location.href = "/IT3103A_ToDo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
+                    window.location.href = "/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
                 } else {
                     alert(result.message);
                 }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 if (response.redirected) {
-                    window.location.href = "/IT3103A_ToDo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
+                    window.location.href = "/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
                 } else {
                     const message = await response.text();
                     alert(message);
