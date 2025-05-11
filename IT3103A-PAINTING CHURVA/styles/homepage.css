@@ -84,7 +84,7 @@ option[disabled] {
     max-width: 300px;
     width: 100%;
     height: 300px;
-    background-color: lightgrey;
+    background-color: transparent;
     text-align: center;
 }
 
@@ -94,6 +94,25 @@ option[disabled] {
     max-width: 300px;
     width: auto;
     height: auto;
+}
+
+/* Tabs background stays off-white, text turns black */
+#artworkTab .nav-link {
+  background-color: #FFFEF2 !important;
+  color: black !important;
+  border: 1px solid #ddd;
+}
+
+/* Active tab: same background, black text, no blue underline */
+#artworkTab .nav-link.active {
+  background-color: #FFFEF2 !important;
+  color: black !important;
+  border-bottom-color: #FFFEF2 !important;
+}
+
+/* Remove blue focus ring when clicking */
+#artworkTab .nav-link:focus {
+  box-shadow: none !important;
 }
 
 /* .imageWithSuwat {
