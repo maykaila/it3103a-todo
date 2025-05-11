@@ -135,7 +135,7 @@ body.no-scroll {
 header {
     display: flex;
     flex-direction: row;
-    background-color: white;
+    background-color: #FFFEF2;
     align-items: center;
     padding: 10px 80px 10px 30px;
     justify-content: space-between;
@@ -174,7 +174,7 @@ header a {
 }
 
 .mainNav {
-    background-color: white;
+    background-color: #FFFEF2;
     padding: 10px 30px 10px 30px;
 }
 
