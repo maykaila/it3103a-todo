@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chromatica | Checkout</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="../styles/headerFooter.css">
+</head>
+<body>
+
+    <header>
+    <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
+    <div class="group">
+        <div class="account">
+        <i class='bx bx-user-circle' id="accountIcon"></i>
+        <div class="dropdown" id="dropdownMenu">
+            <a href="loginUser.html"><button id="loginBtn" class="dropdown-item d-none">Login</button></a>
+            <a href="registerUser.html"><button id="registerBtn" class="dropdown-item d-none">Register</button></a>
+            <button id="logoutBtn" class="dropdown-item d-none">Logout</button>
+        </div>
+        </div>
+        <a href="cart.html"><i class='bx bx-shopping-bag'></i></a>
+    </div>
+    </header>
+
+    <nav class="mainNav">
+    <a href="paintingsPage.html">Paintings</a>
+    <a href="drawingsPage.html">Drawings</a>
+    <a href="printsPage.html">Prints</a>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row g-5">
+            <!-- Order Summary -->
+            <div class="col-md-5">
+                <div class="card shadow-sm p-4">
+                    <h4 class="mb-4">Order Summary</h4>
+                    <div id="orderItemsContainer"></div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                    <p class="fw-bold mb-0">Estimated Total:</p>
+                    <p class="fw-bold mb-0" id="orderTotal">₱0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <div class="col-md-7">
+                <div class="card shadow-sm p-4">
+                    <h4 class="mb-4">Shipping & Payment</h4>
+                    <form id="checkoutForm">
+                    <div class="mb-3">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
+                    </div>
+
+                    <!-- Hidden inputs for user and artwork IDs -->
+                    <input type="hidden" id="userID" name="userID" value="123" />
+                    <input type="hidden" id="artworkID" name="artworkID" value="456" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Card Number</label>
+                        <div id="card-number" class="form-control"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Expiration</label>
+                        <div id="card-expiry" class="form-control"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">CVC</label>
+                        <div id="card-cvc" class="form-control"></div>
+                    </div>
+
+                    <div id="card-errors" class="text-danger mb-3"></div>
+
+                    <button type="submit" class="btn btn-success w-100">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h3>CHROMATICA</h3>
+        <p>"Chromatica is your ultimate destination for discovering and purchasing stunning digital art."</p>
+    </footer>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="../scripts/checkout.js"></script>
+    
+    </body>
+
+</html>
