@@ -4,7 +4,7 @@
  * @param {string} category  One of "Painting","Drawing","Print"
  */
 function loadArtworks(category) {
-  fetch(`/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtworks.php?category=${encodeURIComponent(category)}`)
+  fetch(`/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtworks.php?category=${encodeURIComponent(category)}`)
     .then(res => {
       if (!res.ok) throw new Error(res.status);
       return res.json();
