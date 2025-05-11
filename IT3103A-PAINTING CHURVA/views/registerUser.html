@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromatica | Registration</title>
+    <link rel="stylesheet" href="../styles/headerFooter.css">
+    <link rel="stylesheet" href="../styles/LogReg.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
+        <div class="group">
+            <div class="account">
+                <i class='bx bx-user-circle' id="accountIcon"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
+                </div>
+            </div>
+            
+        <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
+        </div>
+    </header>
+    <center>
+        <div class="container">
+        <h2>REGISTER</h2>
+            <form id="registerForm"> <!--action="register.php" method="POST"-->
+                <input type="text" name="firstname" placeholder="Firstname" id="fname" required>
+                <input type="text" name="lastname" placeholder="Lastname" id="lname" required>
+                <input type="email" name="email" placeholder="Email" id="email" required>
+                <input type="password" name="password" placeholder="Password" id="signupPass" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account?</p>
+            <a href="loginUser.html">Login Here</a>
+        </div>
+    </center>
+    
+<script src="../scripts/handler.js"></script>
+</body>
+</html>

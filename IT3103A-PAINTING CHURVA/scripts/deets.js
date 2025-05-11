@@ -40,4 +40,42 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(() => alert('Failed to load artwork.'));
 
+        // Handle Add to Cart
+      document.getElementById('addToCartBtn').addEventListener('click', () => {
+        // 1) Check login status
+        fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/check_session.php')
+          .then(r => r.json())
+          .then(s => {
+            if (!s.loggedIn) {
+              // show modal if not logged in
+              new bootstrap.Modal(document.getElementById('loginRegisterModal')).show();
+              return;
+            }
+            // 2) Logged in → add to cart
+            fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/addToCart.php', {
+              method: 'POST',
+              headers: { 'Content-Type':'application/json' },
+              body: JSON.stringify({ artwork_id: id })
+            })
+            .then(r => r.json())
+            .then(resp => {
+              if (resp.success) {
+                fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
+                .then(r => r.json())
+                .then(data => {
+                  document.getElementById('cartCount').textContent = data.count;
+                });
+
+                const toastEl = document.getElementById('cartToast');
+                if (toastEl) {
+                  new bootstrap.Toast(toastEl, { delay: 2000 }).show();
+                }
+              } else {
+                alert('Error: ' + (resp.message||'Could not add.'));
+              }
+            })
+            .catch(()=>alert('Network error.'));
+          });
+      });
+      
 });

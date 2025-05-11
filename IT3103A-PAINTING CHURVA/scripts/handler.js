@@ -54,4 +54,74 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    
+    fetch("../php/check_session.php")
+        .then((res) => res.json())
+        .then((data) => {
+            const loginBtn = document.getElementById("loginBtn");
+            const registerBtn = document.getElementById("registerBtn");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            if (!loginBtn || !registerBtn || !logoutBtn) return;
+
+            if (data.loggedIn) {
+                logoutBtn.classList.remove("d-none");
+                loginBtn.classList.add("d-none");
+                registerBtn.classList.add("d-none");
+
+                logoutBtn.addEventListener("click", () => {
+                    window.location.href = "../php/logout.php";
+                });
+            } else {
+                logoutBtn.classList.add("d-none");
+                loginBtn.classList.remove("d-none");
+                registerBtn.classList.remove("d-none");
+            }
+        })
+        .catch((err) => console.error("Session check error:", err));
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const badge = document.getElementById('cartCount');
+        if (!badge) return;
+
+        fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
+            .then(r => r.json())
+            .then(data => {
+            badge.textContent = data.count;
+            })
+            .catch(() => {
+            badge.textContent = '0';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+        const badge = document.getElementById('cartCount');
+        if (!badge) {
+            console.log('handler.js: no #cartCount found');
+            return;
+        }
+
+        console.log('handler.js: #cartCount found, fetching count…');
+        fetch('../php/getCartCount.php')
+            .then(r => {
+            console.log('handler.js: getCartCount.php status', r.status);
+            return r.json();
+            })
+            .then(data => {
+            console.log('handler.js: getCartCount.php JSON', data);
+            badge.textContent = data.count;
+            })
+            .catch(err => {
+            console.error('handler.js: fetch error', err);
+            badge.textContent = '0';
+            });
+        });
+
+        fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
+        .then(r => r.json())
+        .then(data => {
+            document.getElementById('cartCount').textContent = data.count;
+        });
 });
+

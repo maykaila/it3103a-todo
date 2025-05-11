@@ -10,38 +10,6 @@
     <link rel="stylesheet" href="../styles/homepage.css">
 </head>
 <body>
-    <!-- Login Popup -->
-    <div class="popup" id="loginPopup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('loginPopup')">&times;</span>
-            <h2>LOGIN</h2>
-            <form id="loginForm" action="login.php" method="POST">
-            <h3>Welcome to Chromatica!</h3>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account?</p>
-            <a href="">Register Here</a>
-        </div>
-    </div>
-
-    <!-- Register Popup -->
-    <div class="popup" id="registerPopup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup('registerPopup')">&times;</span>
-            <h2>REGISTER</h2>
-            <form id="registerForm" action="register.php" method="POST">
-                <input type="text" name="firstname" placeholder="Firstname" required>
-                <input type="text" name="lastname" placeholder="Lastname" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Register</button>
-            </form>
-            <p>Already have an account?</p>
-            <a href="">Login Here</a>
-        </div>
-    </div>
 
     <!-- Navbar -->
     <header>
@@ -50,12 +18,19 @@
             <div class="account">
                 <i class='bx bx-user-circle' id="accountIcon"></i>
                 <div class="dropdown" id="dropdownMenu">
-                    <button id="loginBtn">Login</button>
-                    <button id="registerBtn">Register</button>
+                    <a href="loginUser.html"><button id="loginBtn" class="dropdown-item d-none">Login</button></a>
+                    <a href="registerUser.html"><button id="registerBtn" class="dropdown-item d-none">Register</button></a>
+                    <button id="logoutBtn" class="dropdown-item d-none">Logout</button>
                 </div>
             </div>
             
-        <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
+        <a href="cart.html" class="position-relative">
+            <i class='bx bx-shopping-bag'></i>
+            <span id="cartCount"
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+        </a>
         </div>
     </header>
     <nav class="mainNav">
@@ -83,6 +58,7 @@
     <!-- empty: artworks.js will inject .details blocks here -->
 </div>
 
+
 <!----------- FOOTER --------------->
     <footer>
         <h3>CHROMATICA</h3>
@@ -91,6 +67,7 @@
 
     <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/homepage.js"></script>
     <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/artworks.js"></script>
+    <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/handler.js"></script>
     <script>
         loadArtworks('Print');
     </script>
