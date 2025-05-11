@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (result.status === "success") {
                     alert(result.message);
-                    window.location.href = "/IT3103A_ToDo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
+                    window.location.href = "/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
                 } else {
                     alert(result.message);
                 }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 if (response.redirected) {
-                    window.location.href = "/IT3103A_ToDo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
+                    window.location.href = "/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
                 } else {
                     const message = await response.text();
                     alert(message);
@@ -54,4 +54,31 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    
+    fetch("../php/check_session.php")
+        .then((res) => res.json())
+        .then((data) => {
+            const loginBtn = document.getElementById("loginBtn");
+            const registerBtn = document.getElementById("registerBtn");
+            const logoutBtn = document.getElementById("logoutBtn");
+
+            if (!loginBtn || !registerBtn || !logoutBtn) return;
+
+            if (data.loggedIn) {
+                logoutBtn.classList.remove("d-none");
+                loginBtn.classList.add("d-none");
+                registerBtn.classList.add("d-none");
+
+                logoutBtn.addEventListener("click", () => {
+                    window.location.href = "../php/logout.php";
+                });
+            } else {
+                logoutBtn.classList.add("d-none");
+                loginBtn.classList.remove("d-none");
+                registerBtn.classList.remove("d-none");
+            }
+        })
+        .catch((err) => console.error("Session check error:", err));
 });
+

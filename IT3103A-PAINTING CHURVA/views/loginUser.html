@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromatica | Login</title>
+    <link rel="stylesheet" href="../styles/headerFooter.css">
+    <link rel="stylesheet" href="../styles/LogReg.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
+        <div class="group">
+            <div class="account">
+                <i class='bx bx-user-circle' id="accountIcon"></i>
+                <div class="dropdown" id="dropdownMenu">
+                    <button id="loginBtn">Login</button>
+                    <button id="registerBtn">Register</button>
+                </div>
+            </div>
+            
+        <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
+        </div>
+    </header>
+    <center>
+        <div class="container">
+        <h2>LOGIN</h2>
+            <form id="loginForm">
+            <h3>Welcome to Chromatica!</h3>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account?</p>
+            <a href="registerUser.html">Register Here</a>
+        </div>
+    </center>
+    
+<script src="../scripts/handler.js"></script>
+</body>
+</html>
