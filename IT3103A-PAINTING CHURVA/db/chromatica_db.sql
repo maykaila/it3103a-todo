@@ -145,3 +145,12 @@ INSERT INTO artworks (
 (28,'Retro Remix',         'Diego Ramirez','1950s pop icons collaged in vibrant serigraph on heavy stock.',                  190.00, 2023, 'Retro pop collage',             '22″×28″', 'Screen print',      'No',                           'Numbered 20/75',                          'Tube',                                     FALSE, 'Print'),
 (29,'Silent Forest',       'Hiro Tanaka','Pine forest in mist multi-block woodcut on washi paper.',                        250.00, 2018, 'Misty pine forest',             '16″×20″', 'Woodcut on washi','Yes (natural wood frame)',  'Seal and signature in red ink',           'Flat-packed board',                       TRUE,  'Print'),
 (30,'Golden Hour',         'Fatima Khan','Stylized desert hills at sunset linocut on archival paper.',                     205.00, 2022, 'Geometric desert landscape',    '18″×18″', 'Linocut on paper', 'No',                           'Numbered 15/40',                          'Tube + waterproof wrap',                  FALSE, 'Print');
+
+-- 1) Add the image_path column
+ALTER TABLE artworks
+  ADD COLUMN image_path VARCHAR(255) NULL AFTER category;
+
+-- 2) Populate it for artworks 1–30, pointing at your local folder
+UPDATE artworks
+SET image_path = CONCAT('/IT3103A-PAINTING CHURVA/images/', artwork_id, '.png')
+WHERE artwork_id BETWEEN 1 AND 30;
