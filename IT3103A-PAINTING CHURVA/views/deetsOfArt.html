@@ -1,122 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chromatica | Cart</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/IT3103A-PAINTING CHURVA/styles/headerFooter.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chromatica | Artwork Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="../styles/headerFooter.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/homepage.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
+  <!-- Navbar -->
+  <header>
         <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
         <div class="group">
             <div class="account">
                 <i class='bx bx-user-circle' id="accountIcon"></i>
                 <div class="dropdown" id="dropdownMenu">
-                    <button id="loginBtn">Login</button>
-                    <button id="registerBtn">Register</button>
+                    <a href="loginUser.html"><button id="loginBtn" class="dropdown-item d-none">Login</button></a>
+                    <a href="registerUser.html"><button id="registerBtn" class="dropdown-item d-none">Register</button></a>
+                    <button id="logoutBtn" class="dropdown-item d-none">Logout</button>
                 </div>
             </div>
             
-        <a href="cart.html"><i class='bx bx-shopping-bag' ></i></a>
+          <a href="cart.html" class="position-relative">
+            <i class='bx bx-shopping-bag'></i>
+            <span id="cartCount"
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              0
+            </span>
+          </a>
         </div>
-    </header>
-    <nav class="mainNav">
-        <a href="">Paintings</a>
-        <a href="">Drawings</a>
-        <a href="">Prints</a>
-    </nav>
-    <div class="overlay" id="overlay"></div>
+  </header>
+  <nav class="mainNav">
+    <a href="paintingsPage.html">Paintings</a>
+    <a href="drawingsPage.html">Drawings</a>
+    <a href="printsPage.html">Prints</a>
+  </nav>
+  <div class="overlay" id="overlay"></div>
 
-    <div class="container my-4">
-        <h2 class="fw-bold">Babae Nga Ga Tahi</h2>
-        <p class="text-muted">Maykaila Arda</p>
-        <div class="row">
-            <!-- Left Column: Image -->
-            <div class="col-md-6">
-              <img 
-                src="/IT3103A-PAINTING CHURVA/images/abstract.jpg" 
-                alt="Babae Nga Ga Tahi" 
-                class="img-fluid w-50" 
-                style="border: 1px solid #ccc; padding: 5px;"
-              >
-            </div>
-      
-            <!-- Right Column: Tabs for About and Details -->
-            <div class="col-md-6">
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="artworkTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" 
-                            type="button" role="tab" aria-controls="about" aria-selected="true">
-                    ABOUT THE ARTWORK
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" 
-                            type="button" role="tab" aria-controls="details" aria-selected="false">
-                    DETAILS AND DIMENSIONS
-                    </button>
-                </li>
-                </ul>
-        
-                <!-- Tab content -->
-                <div class="tab-content p-3 border border-top-0" id="artworkTabContent">
-                <!-- About Tab Pane -->
-                <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-                    <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                    nisi ut aliquip ex ea commodo consequat.
-                    </p>
-                    <ul class="list-unstyled">
-                    <li><strong>Artist:</strong> Maykaila Arda</li>
-                    <li><strong>Year Created:</strong> 2025</li>
-                    <li><strong>Subject:</strong> Woman</li>
-                    <li><strong>Price:</strong> Php 7,000</li>
-                    </ul>
-                </div>
-                <!-- Details Tab Pane -->
-                <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
-                    <ul class="list-unstyled">
-                        <li><strong>Size:</strong> 76.2 W x 76.2 H x 5.1 D cm</li>
-                        <li><strong>Medium:</strong> Painting, Oil on Canvas</li>
-                        <li><strong>Frame:</strong> Not Framed</li>
-                        <li><strong>Authenticity:</strong> Certificate is Included</li>
-                        <li><strong>Packaging:</strong> Ships in a Box</li>
-                        <li><strong>Ready to Hang:</strong> Yes</li>
-                    </ul>
-                </div>
-                </div>
-                
-                <!-- Pricing & Add to Cart Button -->
-                <h5 class="fw-bold mt-3 mb-3">₱7,000</h5>
-                <button class="btn btn-danger">ADD TO CART</button>
-            </div>
+  <div class="container my-4">
+    <h2 class="fw-bold" id="artTitle">Artwork Title</h2>
+    <p class="text-muted" id="artArtist">Artist Name</p>
+    <div class="row">
+      <!-- Left Column: Image -->
+      <div class="col-md-6">
+        <img 
+          id="artImage"
+          src="" 
+          alt="" 
+          class="img-fluid w-50" 
+          style="border: 1px solid #ccc; padding: 5px;"
+        >
+      </div>
+
+      <!-- Right Column: Tabs for About and Details -->
+      <div class="col-md-6">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" id="artworkTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" 
+                    type="button" role="tab" aria-controls="about" aria-selected="true" style="background-color: #FFFEF2;">
+              ABOUT THE ARTWORK
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" 
+                    type="button" role="tab" aria-controls="details" aria-selected="false" style="background-color: #FFFEF2;">
+              DETAILS AND DIMENSIONS
+            </button>
+          </li>
+        </ul>
+
+        <!-- Tab content -->
+        <div class="tab-content p-3 border border-top-0" id="artworkTabContent">
+          <!-- About Tab Pane -->
+          <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+            <p id="artDesc">
+              <!-- description injected here -->
+            </p>
+            <ul class="list-unstyled">
+              <li><strong>Artist:</strong> <span id="aboutArtist"></span></li>
+              <li><strong>Year Created:</strong> <span id="aboutYear"></span></li>
+              <li><strong>Subject:</strong> <span id="aboutSubject"></span></li>
+              <li><strong>Price:</strong> <span id="aboutPrice"></span></li>
+            </ul>
           </div>
-
-        <div class="row mt-5 p-4 shadow-sm">
-            <div class="media">
-                <img class="mr-3" src="..." alt="Profile">
-                <div class="media-body">
-                  <h5 class="mt-0">Maykaila Arda</h5>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
-                  labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
-                  nisi ut aliquip ex ea commodo consequat.      
-              </div>
+          <!-- Details Tab Pane -->
+          <div class="tab-pane fade" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <ul class="list-unstyled">
+              <li><strong>Size:</strong> <span id="detailSize"></span></li>
+              <li><strong>Medium:</strong> <span id="detailMedium"></span></li>
+              <li><strong>Frame:</strong> <span id="detailFrame"></span></li>
+              <li><strong>Authenticity:</strong> <span id="detailAuth"></span></li>
+              <li><strong>Packaging:</strong> <span id="detailPack"></span></li>
+              <li><strong>Ready to Hang:</strong> <span id="detailHang"></span></li>
+            </ul>
+          </div>
         </div>
+
+        <!-- Pricing & Add to Cart Button -->
+        <h5 class="fw-bold mt-3 mb-3" id="priceDisplay">₱0.00</h5>
+        <button id="addToCartBtn" class="btn btn-danger">ADD TO CART</button>
+      </div>
     </div>
-   
-    
-<footer>
+
+    <!-- Artist Bio Section -->
+    <div class="row mt-5 p-4 shadow-sm">
+      <div class="media">
+        <img class="mr-3" id="artistPic" src="" alt="Profile" style="width: 100px; height: 100px;">
+        <br>
+        <br>
+        <div class="media-body">
+          <h5 class="mt-0" id="artistName">Artist Name</h5>
+          <p id="artistBio">
+            <!-- bio injected here -->
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- *** LOGIN / REGISTER PROMPT MODAL *** -->
+  <div class="modal fade" id="loginRegisterModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Please Sign In</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>You need to be signed in before adding to your cart.</p>
+        </div>
+        <div class="modal-footer">
+          <a href="loginUser.html" class="btn btn-primary">Login</a>
+          <a href="registerUser.html" class="btn btn-secondary">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+  <div id="cartToast" class="toast align-items-center text-bg-success border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body">Added to cart!</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto"
+              data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+
+  <footer>
     <h3>CHROMATICA</h3>
-    <p>"Chromatica is your ultimate destination for discovering and purchasing stunning digital art. Whether you're an artist looking to showcase your work or an art enthusiast searching for unique pieces, our platform connects creativity with passion. Explore, create, and collect — all in one place!"</p>
-</footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/IT3103A-PAINTING CHURVA/scripts/homepage.js"></script>
+        <p>"Chromatica is your ultimate destination for discovering and purchasing stunning digital art. Whether you're an artist looking to showcase your work or an art enthusiast searching for unique pieces, our platform connects creativity with passion. Explore, create, and collect — all in one place!"</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/scripts/deets.js"></script>
+  <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/homepage.js"></script>
+    <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/handler.js"></script>
 </body>
 </html>

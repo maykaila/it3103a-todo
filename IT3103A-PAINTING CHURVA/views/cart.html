@@ -6,7 +6,7 @@
     <title>Chromatica | Cart</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/it3103a-todo/IT3103A-PAINTING CHURVA/styles/headerFooter.css">
+    <link rel="stylesheet" href="../styles/headerFooter.css">
 </head>
 <body>
 
@@ -27,47 +27,28 @@
         </div>
     </header>
     <nav class="mainNav">
-        <a href="../views/paintingsPage.html">Paintings</a>
-        <a href="../views/drawingsPage.html">Drawings</a>
-        <a href="../views/printsPage.html">Prints</a>
+        <a href="paintingsPage.html">Paintings</a>
+        <a href="drawingsPage.html">Drawings</a>
+        <a href="printsPage.html">Prints</a>
     </nav>
     <div class="overlay" id="overlay"></div>
     
     <!-- MAIN CONTENT -->
   <div class="container my-5">
     <!-- Order Summary Card -->
-    <div class="row mb-4 col-12 card p-4 shadow-sm">
-          <h2 class="card-title">Order Summary</h2>
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <p class="mb-0 fs-5">Estimated Total:</p>
-                <p class="fw-bold mb-0 fs-5">₱12,000</p>
-            </div>
-          <button class="btn btn-success mt-4 w-100">CHECKOUT</button>
+    <div id="summaryCard" class="row mb-4 col-12 card p-4 shadow-sm">
+      <h2 class="card-title">Order Summary</h2>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <p class="mb-0 fs-5">Estimated Total:</p>
+        <p id="estimatedTotal" class="fw-bold mb-0 fs-5">₱0.00</p>
+      </div>
+      <button class="btn btn-success mt-4 w-100" id="checkoutBtn">CHECKOUT</button>
     </div>
 
     <!-- Cart Section -->
-    <div class="row col-12 card p-4 shadow-sm">
-          <h3 class="mb-4">Cart</h3>
-          <!-- Single Item Card -->
-          <div class="card shadow-sm">
-            <div class="row g-0">
-              <div class="col-md-3">
-                <img src="/IT3103A-PAINTING CHURVA/images/abstract.jpg" class="img-fluid rounded-start" alt="Babae Nga Ga Tahi"/>
-              </div>
-              <div class="col-md-8 card-body d-flex justify-content-between">
-                  <div class="my-4">
-                    <h5 class="card-title ">Babae Nga Ga Tahi</h5>
-                    <p class="card-text mb-1">Maykaila Arda</p>
-                    <p class="card-text mb-1">Painting</p>
-                    <p class="card-text mb-1">Shipping Included</p>
-                  </div>
-                  <div class="d-flex my-4">
-                    <p class="fw-bold fs-5 mb-0">₱12,000</p>
-                  </div>
-              </div>
-            </div>
-          </div> 
-          <!-- End Single Item Card -->
+    <div id="cartItemsContainer" class="row col-12 card p-4 shadow-sm">
+      <h3 class="mb-4">Cart</h3>
+      <!-- Items will be injected here -->
     </div>
   </div>
 <footer>
@@ -75,9 +56,10 @@
     <p>"Chromatica is your ultimate destination for discovering and purchasing stunning digital art. Whether you're an artist looking to showcase your work or an art enthusiast searching for unique pieces, our platform connects creativity with passion. Explore, create, and collect — all in one place!"</p>
 </footer>
     
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/homepage.js"></script>
-    <script src="../scripts/handler.js"></script>
+    <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/homepage.js"></script>
+    <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/handler.js"></script>
+    <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/cart.js"></script>
+
 </body>
 </html>
