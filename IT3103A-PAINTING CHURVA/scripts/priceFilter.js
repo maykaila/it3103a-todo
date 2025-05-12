@@ -25,7 +25,7 @@ function handleSortChangez() {
 
 
 function fetchArtworks(category, minPrice = 0, maxPrice = 1000000, sort = '', containerId = '.data-container') {
-  const url = `/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtworks.php?category=${encodeURIComponent(category)}&sort=${encodeURIComponent(sort)}&min_price=${minPrice}&max_price=${maxPrice}`;
+  const url = `/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtworks.php?category=${encodeURIComponent(category)}&sort=${encodeURIComponent(sort)}&min_price=${minPrice}&max_price=${maxPrice}`;
 
   fetch(url)
     .then(res => {
@@ -40,7 +40,7 @@ function fetchArtworks(category, minPrice = 0, maxPrice = 1000000, sort = '', co
       }
       container.innerHTML = data.map(item => `
         <div class="details">
-          <a href="/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/deetsOfArt.html?id=${item.artwork_id}">
+          <a href="/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/deetsOfArt.html?id=${item.artwork_id}">
             <div class="eachPainting">
               <img src="${encodeURI(item.image_path)}" alt="${item.title}">
             </div>

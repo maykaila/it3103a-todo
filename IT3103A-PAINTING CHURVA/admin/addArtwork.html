@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Add Artwork</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4" style="background-color: #FFFEF2;">
+  <h3>Add New Artwork</h3>
+  <br>
+  <form id="artForm">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input name="title" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Artist</label>
+      <select name="artist_id" id="artistSelect" class="form-select" required></select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Year Created</label>
+      <input name="year_created" type="number" class="form-control" placeholder="e.g. 2024">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Subject</label>
+      <input name="subject" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Size (e.g. 24″×36″)</label>
+      <input name="size_dimensions" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Medium</label>
+      <input name="medium" class="form-control" placeholder="Oil on canvas, etc.">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Frame</label>
+      <input name="frame" class="form-control" placeholder="e.g. Yes (white floater)">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Authenticity</label>
+      <input name="authenticity" class="form-control" placeholder="COA, stamp, etc.">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Packaging</label>
+      <input name="packaging" class="form-control" placeholder="Box, tube, crate…">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Ready to Hang?</label>
+      <select name="ready_to_hang" class="form-select">
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Category</label>
+      <select name="category" class="form-select" required>
+        <option>Painting</option>
+        <option>Drawing</option>
+        <option>Print</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Price</label>
+      <input name="price" type="number" step="0.01" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Upload Image</label>
+      <input name="image_file" type="file" accept="image/*" class="form-control" required>
+    </div>
+
+    <!-- <div class="mb-3">
+      <label class="form-label">Image URL</label>
+      <input name="image_path" class="form-control">
+    </div> -->
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea name="description" class="form-control" rows="3"></textarea>
+    </div>
+
+    <button class="btn btn-success">Save Artwork</button>
+    <a href="adminSide.html" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+
+  <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/scripts/admin.js"></script>
+</body>
+</html>

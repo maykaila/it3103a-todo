@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chromatica Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/homepage.css">
+  <link rel="stylesheet" href="../styles/headerFooter.css">
+  <style>
+    body { background: #FFFEF2; }
+    .section { background: #FFFEF2; padding: 1.5rem; border: 1px solid black; border-radius: 8px; margin-bottom: 1.5rem; }
+    .scroll-list { max-height: 300px; overflow-y: auto; }
+  </style>
+</head>
+<body>
+
+  <header class="mt-1 mb-4" style="background-color: #FFFEF2;">
+        <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
+    </header>
+
+  <div class="container">
+
+    <!-- Analytics -->
+    <div id="analytics" class="section">
+      <h4>Analytics</h4>
+      <div class="row gy-4">
+        <div class="col-md-4">
+          <div class="section h-100">
+            <h6>Monthly Total Sales</h6>
+            <canvas id="salesPieChart" style="width:100%;height:200px;"></canvas>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="section h-100">
+            <h6>Trends</h6>
+            <canvas id="salesLineChart" style="width:100%;height:200px;"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Artwork Management -->
+    <div id="artManagement" class="section">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Artwork Management</h4>
+        <a href="addArtwork.html" class="btn btn-primary">
+          <i class='bx bx-plus'></i> Add Artwork
+        </a>
+      </div>
+      <div class="d-flex align-items-center mb-2">
+        <button id="prevArt" class="btn btn-light me-2"><i class='bx bx-chevron-left'></i></button>
+        <div id="artCarousel" class="d-flex gap-3 overflow-hidden flex-grow-1">
+          <!-- JS will inject artwork cards here -->
+        </div>
+        <button id="nextArt" class="btn btn-light ms-2"><i class='bx bx-chevron-right'></i></button>
+      </div>
+    </div>
+
+    <!-- Artist Management -->
+    <div id="artistManagement" class="section">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4>Artist Management</h4>
+        <a href="addArtists.html" class="btn btn-primary">
+          <i class='bx bx-plus'></i> Add Artist
+        </a>
+      </div>
+      <div id="artistList" class="list-group scroll-list">
+        <!-- JS will inject artist items here -->
+      </div>
+    </div>
+
+  <!-- Bootstrap & Chart.js (for later) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/scripts/admin.js"></script>
+
+  <!-- Admin Dashboard Logic
+  <script>
+    // === Analytics Charts (dummy data) ===
+    const pieCtx = document.getElementById('salesPieChart');
+    new Chart(pieCtx, {
+      type: 'pie',
+      data: {
+        labels: ['Paintings','Drawings','Prints'],
+        datasets: [{ data: [12,8,5] }]
+      }
+    });
+    const lineCtx = document.getElementById('salesLineChart');
+    new Chart(lineCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May'],
+        datasets: [{ label:'Sales', data: [500, 800, 700, 1200, 900], fill:false }]
+      }
+    });
+
+    // === Artwork Carousel Stub ===
+    const artworks = [
+      { title:'Sunlit Meadow', price:1200, desc:'Landscape', img:'/images/1.png' },
+      { title:'Urban Rhythm', price:1800, desc:'Abstract', img:'/images/2.png' },
+      { title:'Whispering Pines', price:950, desc:'Forest', img:'/images/3.png' },
+      { title:'Crimson Bloom', price:1100, desc:'Floral', img:'/images/4.png' }
+    ];
+    const artCarousel = document.getElementById('artCarousel');
+    artworks.forEach(a => {
+      const card = document.createElement('div');
+      card.style.minWidth = '200px';
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${a.img}" class="card-img-top" style="height:120px;object-fit:cover">
+        <div class="card-body p-2">
+          <h6 class="card-title mb-1">${a.title}</h6>
+          <p class="mb-1">₱${a.price}</p>
+          <p class="small text-muted">${a.desc}</p>
+        </div>`;
+      artCarousel.append(card);
+    });
+    document.getElementById('prevArt').onclick = () => artCarousel.scrollBy({ left:-220, behavior:'smooth' });
+    document.getElementById('nextArt').onclick = () => artCarousel.scrollBy({ left:220, behavior:'smooth' });
+
+    // === Artist Management Stub ===
+    const artists = ['Alice Chen','Marco Silva','Nora Patel','Jaime Ortega','Lydia Kim'];
+    const list = document.querySelector('#artistManagement .list-group');
+    artists.forEach(name => {
+      const item = document.createElement('div');
+      item.className = 'list-group-item d-flex align-items-center';
+      item.innerHTML = `
+        <i class='bx bx-user-circle bx-lg me-3'></i>
+        <span>${name}</span>
+      `;
+      list.append(item);
+    });
+  </script> -->
+</body>
+</html>
