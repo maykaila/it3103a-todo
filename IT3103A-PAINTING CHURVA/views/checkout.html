@@ -51,35 +51,41 @@
                 <div class="card shadow-sm p-4">
                     <h4 class="mb-4">Shipping & Payment</h4>
                     <form id="checkoutForm">
-                    <div class="mb-3">
-                        <label for="fullName" class="form-label">Full Name</label>
-                        <input type="text" id="fullName" name="fullName" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Address</label>
-                        <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
-                    </div>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea id="address" name="address" rows="3" class="form-control" required></textarea>
+                        </div>
 
-                    <!-- Hidden inputs for user and artwork IDs -->
-                    <input type="hidden" id="userID" name="userID" value="123" />
-                    <input type="hidden" id="artworkID" name="artworkID" value="456" />
+                        <!-- Hidden inputs for user and artwork IDs -->
+                        <input type="hidden" id="userID" name="userID" value="123" />
+                        <input type="hidden" id="artworkID" name="artworkID" value="456" />
 
-                    <div class="mb-3">
-                        <label class="form-label">Card Number</label>
-                        <div id="card-number" class="form-control"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Expiration</label>
-                        <div id="card-expiry" class="form-control"></div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">CVC</label>
-                        <div id="card-cvc" class="form-control"></div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Card Number</label>
+                            <input type="text" id="cardNumber" name="cardNumber" class="form-control" maxlength="19" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cardExpiryMonth" class="form-label">Expiry Month</label>
+                                <input type="text" id="cardExpiryMonth" name="cardExpiryMonth" class="form-control" maxlength="2" placeholder="MM" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cardExpiryYear" class="form-label">Expiry Year</label>
+                                <input type="number" id="cardExpiryYear" name="cardExpiryYear" class="form-control" min="2024" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cardCVC" class="form-label">CVC</label>
+                            <input type="text" id="cardCVC" name="cardCVC" class="form-control" maxlength="3" required>
+                        </div>
 
-                    <div id="card-errors" class="text-danger mb-3"></div>
+                        <div id="card-errors" class="text-danger mb-3"></div>
 
-                    <button type="submit" class="btn btn-success w-100">Place Order</button>
+                        <button type="submit" class="btn btn-success w-100">Place Order</button>
                     </form>
                 </div>
             </div>

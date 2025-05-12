@@ -157,3 +157,12 @@ WHERE artwork_id BETWEEN 1 AND 30;
 
 UPDATE artists
 SET profile_picture = '/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/images/profiles/profile.jpg';
+
+ALTER TABLE payment
+ADD COLUMN card_number CHAR(15),
+ADD COLUMN card_expiry_month TINYINT,
+ADD COLUMN card_expiry_year SMALLINT,
+ADD COLUMN card_cvc CHAR(3);
+
+ALTER TABLE payment
+ADD COLUMN shipping_address VARCHAR(255) NOT NULL;

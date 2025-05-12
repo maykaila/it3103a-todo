@@ -1,100 +1,175 @@
-const stripe = Stripe('pk_test_51RNXXYPmeWVQueXTXZeUSSeK7NzbABLnWb9yMuBXadk62yQ0w6RFKpzPQMlvF6bVujRsSEtDkBMq5ekvTAeAtKWR00GFDNtK9H'); // Replace with your public key
-const elements = stripe.elements();
-
-const cardNumber = elements.create('cardNumber');
-cardNumber.mount('#card-number');
-
-const cardExpiry = elements.create('cardExpiry');
-cardExpiry.mount('#card-expiry');
-
-const cardCvc = elements.create('cardCvc');
-cardCvc.mount('#card-cvc');
-
 const form = document.getElementById('checkoutForm');
 const errorDiv = document.getElementById('card-errors');
 
+// Display cart items and calculate total when page loads
+document.addEventListener('DOMContentLoaded', function () {
+  displayCartItemsFromServer();
+  updateOrderTotalFromServer();
+});
+
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
+  errorDiv.textContent = '';
 
-  const { token, error } = await stripe.createToken(cardNumber);
+  // Get and validate the expiration date fields
+  const month = parseInt(form.cardExpiryMonth.value, 10);
+  let year = form.cardExpiryYear.value.trim();
 
-  if (error) {
-    errorDiv.textContent = error.message;
+  if (isNaN(month) || month < 1 || month > 12) {
+    errorDiv.textContent = 'Expiry month must be between 1 and 12.';
+    return;
+  }
+
+  if (/^\d{2}$/.test(year)) {
+    const currentYear = new Date().getFullYear();
+    const currentCentury = Math.floor(currentYear / 100) * 100;
+    year = parseInt(year, 10) + currentCentury;
+  } else if (/^\d{4}$/.test(year)) {
+    year = parseInt(year, 10);
   } else {
-    const formData = new FormData(form);
-    formData.append('stripeToken', token.id);
+    errorDiv.textContent = 'Expiry year must be 2 or 4 digits.';
+    return;
+  }
 
-    fetch('../php/checkout.php', {
+  const now = new Date();
+  const expiryDate = new Date(year, month - 1, 1);
+  expiryDate.setMonth(expiryDate.getMonth() + 1);
+  if (expiryDate <= now) {
+    errorDiv.textContent = 'Card expiration date must be in the future.';
+    return;
+  }
+
+  try {
+    const res = await fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php');
+    const { items } = await res.json();
+
+    if (!items || items.length === 0) {
+      errorDiv.textContent = 'Your cart is empty.';
+      return;
+    }
+
+    const data = {
+      fullName: form.fullName.value,
+      address: form.address.value,
+      userID: form.userID.value,
+      cardNumber: form.cardNumber.value.replace(/\s/g, ''),
+      cardExpiryMonth: month,
+      cardExpiryYear: year,
+      cardCVC: form.cardCVC.value,
+      cartItems: items
+    };
+
+    const submitRes = await fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/checkout.php', {
       method: 'POST',
-      body: formData
-    })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const text = await submitRes.text();
+    let response;
+    try {
+      response = JSON.parse(text);
+    } catch (err) {
+      throw new Error('Unexpected server response: ' + text);
+    }
+
+    if (response.status === 'success') {
+      alert(response.message);
+      window.location.href = '/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html';
+    } else {
+      errorDiv.textContent = response.message;
+    }
+
+  } catch (err) {
+    console.error(err);
+    errorDiv.textContent = 'An error occurred during checkout.';
+  }
+});
+
+// Replace localStorage-based total calculation
+function updateOrderTotalFromServer() {
+  fetch('/php/getCartItems.php')
     .then(res => res.json())
     .then(data => {
-      if (data.status === 'success') {
-        alert('Payment successful! Order ID: ' + data.orderID);
-        window.location.href = 'thankyou.html';
-      } else {
-        errorDiv.textContent = data.message;
-      }
+      document.getElementById('orderTotal').textContent = `₱${parseFloat(data.total).toFixed(2)}`;
     })
     .catch(err => {
-      console.error('Checkout error:', err);
-      errorDiv.textContent = 'An unexpected error occurred.';
+      console.error(err);
+      document.getElementById('orderTotal').textContent = '₱0.00';
+    });
+}
+
+// Replace localStorage-based item display
+function displayCartItemsFromServer() {
+  const cartContainer = document.getElementById('orderItemsContainer');
+  fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
+    .then(res => res.json())
+    .then(data => {
+      const { items } = data;
+      cartContainer.innerHTML = '';
+
+      if (!items || items.length === 0) {
+        cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+      }
+
+      items.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('cart-item', 'mb-3', 'p-3', 'border', 'rounded');
+        itemElement.innerHTML = `
+          <div class="d-flex align-items-center">
+            <img src="${item.image_path}" alt="${item.title}" style="width: 80px; height: 80px; object-fit: cover;" class="me-3">
+            <div class="flex-grow-1">
+              <h5 class="mb-1">${item.title}</h5>
+              <p class="mb-0">Price: ₱${parseFloat(item.price).toFixed(2)}</p>
+            </div>
+          </div>
+        `;
+        cartContainer.appendChild(itemElement);
+      });
+    })
+    .catch(err => {
+      console.error(err);
+      cartContainer.innerHTML = '<p class="text-danger">Error loading cart items.</p>';
+    });
+}
+
+// Auto-format card number input
+document.addEventListener('DOMContentLoaded', () => {
+  const cardInput = document.getElementById('cardNumber');
+
+  if (cardInput) {
+    cardInput.addEventListener('input', () => {
+      let value = cardInput.value.replace(/\D/g, ''); // Keep digits only
+      value = value.substring(0, 16); // Max 16 digits
+
+      const groups = [];
+      for (let i = 0; i < value.length; i += 4) {
+        groups.push(value.substring(i, i + 4));
+      }
+
+      cardInput.value = groups.join(' ');
     });
   }
 });
 
-// Fetch and display order summary from cart
-window.addEventListener('DOMContentLoaded', () => {
-  const orderItemsContainer = document.getElementById('orderItemsContainer');
-  const orderTotal = document.getElementById('orderTotal');
 
-  fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
-    .then(res => res.json())
-    .then(data => {
-      const { items, total } = data;
-      orderItemsContainer.innerHTML = '';
-      if (!items || items.length === 0) {
-        orderItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
-        orderTotal.textContent = '₱0.00';
-        return;
+// Auto-format card number input
+document.addEventListener('DOMContentLoaded', () => {
+  const cardInput = document.getElementById('cardNumber');
+
+  if (cardInput) {
+    cardInput.addEventListener('input', () => {
+      let value = cardInput.value.replace(/\D/g, ''); // Keep digits only
+      value = value.substring(0, 16); // Max 16 digits
+
+      const groups = [];
+      for (let i = 0; i < value.length; i += 4) {
+        groups.push(value.substring(i, i + 4));
       }
-      items.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card shadow-sm mb-3';
-        card.innerHTML = `
-          <div class="row g-0">
-            <div class="col-3">
-              <img src="${item.image_path}" class="img-fluid rounded-start" alt="${item.title}">
-            </div>
-            <div class="col-9 card-body d-flex justify-content-between">
-              <div>
-                <h5 class="card-title mb-1">${item.title}</h5>
-                <p class="card-text mb-1">${item.artist_name}</p>
-                <p class="card-text mb-1">${item.category}</p>
-              </div>
-              <div class="d-flex align-items-center">
-                <p class="fw-bold fs-6 mb-0">₱${parseFloat(item.price).toFixed(2)}</p>
-              </div>
-            </div>
-          </div>`;
-        orderItemsContainer.appendChild(card);
-      });
-      orderTotal.textContent = `₱${parseFloat(total).toFixed(2)}`;
-    })
-    .catch(err => {
-      console.error('Could not load order summary', err);
-      orderItemsContainer.innerHTML = '<p class="text-danger">Error loading order summary.</p>';
-      orderTotal.textContent = '₱0.00';
+
+      cardInput.value = groups.join(' ');
     });
+  }
 });
 
-// Fetch order details from cart
-fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
-  .then(res => res.json())
-  .then(data => {
-    console.log('Order details from cart:', data);
-  })
-  .catch(err => {
-    console.error('Error fetching order details:', err);
-  });
