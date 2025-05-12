@@ -97,8 +97,4 @@ fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php
   })
   .catch(err => {
     console.error('Error fetching order details:', err);
-<<<<<<< HEAD
   });
-=======
-  });
->>>>>>> e2bbeb87f92985ad455f857a8079714a53dfb024
