@@ -1,17 +1,41 @@
 const form = document.getElementById('checkoutForm');
 const errorDiv = document.getElementById('card-errors');
 
-// Display cart items and calculate total when page loads
-document.addEventListener('DOMContentLoaded', function () {
+// Init on load
+document.addEventListener('DOMContentLoaded', () => {
   displayCartItemsFromServer();
   updateOrderTotalFromServer();
+  restrictNumericInput('cardCVC', 4);
+  setupCardNumberFormatting();
 });
 
+// Allow only digits (with max length)
+function restrictNumericInput(fieldId, maxLength) {
+  const input = document.getElementById(fieldId);
+  if (input) {
+    input.addEventListener('input', () => {
+      input.value = input.value.replace(/\D/g, '').slice(0, maxLength);
+    });
+  }
+}
+
+// Auto-format card number input to #### #### #### ####
+function setupCardNumberFormatting() {
+  const cardInput = document.getElementById('cardNumber');
+  if (!cardInput) return;
+
+  cardInput.addEventListener('input', () => {
+    let value = cardInput.value.replace(/\D/g, '').slice(0, 16);
+    const formatted = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+    cardInput.value = formatted;
+  });
+}
+
+// Form submission logic
 form.addEventListener('submit', async function (e) {
   e.preventDefault();
   errorDiv.textContent = '';
 
-  // Get and validate the expiration date fields
   const month = parseInt(form.cardExpiryMonth.value, 10);
   let year = form.cardExpiryYear.value.trim();
 
@@ -86,9 +110,9 @@ form.addEventListener('submit', async function (e) {
   }
 });
 
-// Replace localStorage-based total calculation
+// Show total from server
 function updateOrderTotalFromServer() {
-  fetch('/php/getCartItems.php')
+  fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
     .then(res => res.json())
     .then(data => {
       document.getElementById('orderTotal').textContent = `₱${parseFloat(data.total).toFixed(2)}`;
@@ -99,7 +123,7 @@ function updateOrderTotalFromServer() {
     });
 }
 
-// Replace localStorage-based item display
+// Display items in cart
 function displayCartItemsFromServer() {
   const cartContainer = document.getElementById('orderItemsContainer');
   fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
@@ -133,43 +157,3 @@ function displayCartItemsFromServer() {
       cartContainer.innerHTML = '<p class="text-danger">Error loading cart items.</p>';
     });
 }
-
-// Auto-format card number input
-document.addEventListener('DOMContentLoaded', () => {
-  const cardInput = document.getElementById('cardNumber');
-
-  if (cardInput) {
-    cardInput.addEventListener('input', () => {
-      let value = cardInput.value.replace(/\D/g, ''); // Keep digits only
-      value = value.substring(0, 16); // Max 16 digits
-
-      const groups = [];
-      for (let i = 0; i < value.length; i += 4) {
-        groups.push(value.substring(i, i + 4));
-      }
-
-      cardInput.value = groups.join(' ');
-    });
-  }
-});
-
-
-// Auto-format card number input
-document.addEventListener('DOMContentLoaded', () => {
-  const cardInput = document.getElementById('cardNumber');
-
-  if (cardInput) {
-    cardInput.addEventListener('input', () => {
-      let value = cardInput.value.replace(/\D/g, ''); // Keep digits only
-      value = value.substring(0, 16); // Max 16 digits
-
-      const groups = [];
-      for (let i = 0; i < value.length; i += 4) {
-        groups.push(value.substring(i, i + 4));
-      }
-
-      cardInput.value = groups.join(' ');
-    });
-  }
-});
-
