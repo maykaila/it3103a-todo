@@ -3,7 +3,6 @@
     margin: 0;
 }
 
-
 /* Sa Shop by Price buttons */
 .custom-btn {
     background-color: white;
@@ -114,6 +113,8 @@ option[disabled] {
 #artworkTab .nav-link:focus {
   box-shadow: none !important;
 }
+
+
 
 /* .imageWithSuwat {
     background-image: url(homepagePainting.jpg);
