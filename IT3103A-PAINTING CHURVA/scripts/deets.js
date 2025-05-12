@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Fetch details endpoint
-  fetch(`/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtDetails.php?id=${encodeURIComponent(id)}`)
+  fetch(`/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtDetails.php?id=${encodeURIComponent(id)}`)
     .then(r => r.json())
     .then(art => {
       document.getElementById('artImage').src         = art.image_path;
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Handle Add to Cart
       document.getElementById('addToCartBtn').addEventListener('click', () => {
         // 1) Check login status
-        fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/check_session.php')
+        fetch('/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/check_session.php')
           .then(r => r.json())
           .then(s => {
             if (!s.loggedIn) {
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
               return;
             }
             // 2) Logged in → add to cart
-            fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/addToCart.php', {
+            fetch('/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/addToCart.php', {
               method: 'POST',
               headers: { 'Content-Type':'application/json' },
               body: JSON.stringify({ artwork_id: id })
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(r => r.json())
             .then(resp => {
               if (resp.success) {
-                fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
+                fetch('/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
                 .then(r => r.json())
                 .then(data => {
                   document.getElementById('cartCount').textContent = data.count;

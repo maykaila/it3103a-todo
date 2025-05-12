@@ -13,7 +13,7 @@ require __DIR__ . '/config.php';
 
 // Fetch each pending order with its artwork details
 $stmt = $pdo->prepare("
-  SELECT o.order_id, a.artwork_id, a.title, a.price, a.image_path, ar.artist_name, a.category
+  SELECT o.order_id AS cart_item_id, a.artwork_id, a.title, a.price, a.image_path, ar.artist_name, a.category
   FROM orders o
   JOIN artworks a  ON o.artwork_id = a.artwork_id
   JOIN artists  ar ON a.artist_id   = ar.artist_id
