@@ -152,7 +152,7 @@ ALTER TABLE artworks
 
 -- 2) Populate it for artworks 1–30, pointing at your local folder
 UPDATE artworks
-SET image_path = CONCAT('/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/images/', artwork_id, '.png')
+SET image_path = CONCAT('/it3103a-todo/it3103a-todo/IT3103A-PAINTING CHURVA/images/artworks/', artwork_id, '.png')
 WHERE artwork_id BETWEEN 1 AND 30;
 
 UPDATE artists
