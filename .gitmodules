@@ -1,0 +1,3 @@
+[submodule "IT3103A-PAINTING CHURVA/stripe/stripe-php"]
+	path = IT3103A-PAINTING CHURVA/stripe/stripe-php
+	url = https://github.com/stripe/stripe-php.git
