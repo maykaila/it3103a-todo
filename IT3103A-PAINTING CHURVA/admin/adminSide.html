@@ -17,7 +17,7 @@
 <body>
 
   <header class="mt-1 mb-4" style="background-color: #FFFEF2;">
-        <a class="navbar-brand fw-bold" href="homepage.html">CHROMATICA</a>
+        <a class="navbar-brand fw-bold" href="adminSide.html">CHROMATICA</a>
     </header>
 
   <div class="container">
@@ -41,13 +41,18 @@
       </div>
     </div>
 
-    <!-- Artwork Management -->
+        <!-- Artwork Management -->
     <div id="artManagement" class="section">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Artwork Management</h4>
-        <a href="addArtwork.html" class="btn btn-primary">
-          <i class='bx bx-plus'></i> Add Artwork
-        </a>
+        <div>
+          <a href="addArtwork.html" class="btn btn-primary me-2">
+            <i class='bx bx-plus'></i> Add Artwork
+          </a>
+          <a href="manageArtworks.html" class="btn btn-outline-secondary">
+            See All →
+          </a>
+        </div>
       </div>
       <div class="d-flex align-items-center mb-2">
         <button id="prevArt" class="btn btn-light me-2"><i class='bx bx-chevron-left'></i></button>
@@ -62,9 +67,14 @@
     <div id="artistManagement" class="section">
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Artist Management</h4>
-        <a href="addArtists.html" class="btn btn-primary">
-          <i class='bx bx-plus'></i> Add Artist
-        </a>
+        <div>
+          <a href="addArtists.html" class="btn btn-primary me-2">
+            <i class='bx bx-plus'></i> Add Artist
+          </a>
+          <a href="manageArtists.html" class="btn btn-outline-secondary">
+            See All →
+          </a>
+        </div>
       </div>
       <div id="artistList" class="list-group scroll-list">
         <!-- JS will inject artist items here -->
