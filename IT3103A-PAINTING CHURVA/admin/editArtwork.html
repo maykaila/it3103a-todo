@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>Edit Artwork</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/homepage.css">
+  <link rel="stylesheet" href="../styles/headerFooter.css">
+</head>
+<body style="background:#FFFEF2">
+    <header class="mt-1" style="background-color: #FFFEF2;">
+        <a class="navbar-brand fw-bold" href="adminSide.html">CHROMATICA</a>
+    </header>
+    <div class="p-4">
+        <h3>Edit Artwork</h3>
+        <form id="editArtForm" enctype="multipart/form-data">
+            <input type="hidden" name="artwork_id" id="artworkId">
+
+            <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input name="title" id="title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Artist</label>
+            <select name="artist_id" id="artistSelect" class="form-select" required></select>
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Year Created</label>
+            <input name="year_created" id="year_created" type="number" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Subject</label>
+            <input name="subject" id="subject" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Size</label>
+            <input name="size_dimensions" id="size_dimensions" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Medium</label>
+            <input name="medium" id="medium" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Frame</label>
+            <input name="frame" id="frame" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Authenticity</label>
+            <input name="authenticity" id="authenticity" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Packaging</label>
+            <input name="packaging" id="packaging" class="form-control">
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Ready to Hang?</label>
+            <select name="ready_to_hang" id="ready_to_hang" class="form-select">
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select name="category" id="category" class="form-select" required>
+                <option>Painting</option>
+                <option>Drawing</option>
+                <option>Print</option>
+            </select>
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input name="price" id="price" type="number" step="0.01" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label">Current Image</label>
+            <div><img id="currentImage" src="" style="max-height:100px"></div>
+            </div>
+
+            <!-- Preserve the existing path if no new upload -->
+            <input type="hidden" name="existing_image_path" id="existingImagePath">
+
+            <div class="mb-3">
+            <label class="form-label">Replace Image</label>
+            <input name="image_file" type="file" accept="image/*" class="form-control">
+            </div>
+
+            <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button class="btn btn-primary">Save Changes</button>
+            <a href="manageArtworks.html" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+
+  <script src="../scripts/edit.js"></script>
+</body>
+</html>

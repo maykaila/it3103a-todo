@@ -21,7 +21,7 @@ function loadArtworks(category, sort = '') {
         <div class="details">
           <a href="/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/deetsOfArt.html?id=${item.artwork_id}">
             <div class="eachPainting">
-              <img src="${encodeURI(item.image_path)}" alt="${item.title}">
+              <img src="${item.image_path}" alt="${item.title}">
             </div>
           </a>
           <p>${item.title}</p>
