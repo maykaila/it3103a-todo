@@ -8,7 +8,7 @@
  */
 
 function loadArtworks(category, sort = '') {
-  const url = `/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtworks.php?category=${encodeURIComponent(category)}&sort=${encodeURIComponent(sort)}`;
+  const url = `/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getArtworks.php?category=${encodeURIComponent(category)}&sort=${encodeURIComponent(sort)}`;
 
   fetch(url)
     .then(res => {
@@ -19,7 +19,7 @@ function loadArtworks(category, sort = '') {
       const container = document.querySelector('.data-container');
       container.innerHTML = data.map(item => `
         <div class="details">
-          <a href="/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/deetsOfArt.html?id=${item.artwork_id}">
+          <a href="/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/deetsOfArt.html?id=${item.artwork_id}">
             <div class="eachPainting">
               <img src="${encodeURI(item.image_path)}" alt="${item.title}">
             </div>

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const summary   = document.getElementById('summaryCard');
 
   // 1) Fetch all pending orders for this user
-  fetch('/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
+  fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartItems.php')
     .then(res => res.json())
     .then(data => {
       const { items, total } = data;
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const card = e.target.closest('.card');
       const itemId = card.dataset.itemId;
 
-      fetch(`/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/removeCartItem.php`, {
+      fetch(`/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/removeCartItem.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
