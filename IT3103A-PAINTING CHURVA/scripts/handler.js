@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (result.status === "success") {
                     alert(result.message);
-                    window.location.href = "/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
+                    window.location.href = "/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
                 } else {
                     alert(result.message);
                 }
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 if (response.redirected) {
-                    window.location.href = "/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
+                    window.location.href = "/it3103a-todo/IT3103A-PAINTING%20CHURVA/views/homepage.html";
                 } else {
                     const message = await response.text();
                     alert(message);
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const badge = document.getElementById('cartCount');
         if (!badge) return;
 
-        fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
+        fetch('/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
             .then(r => r.json())
             .then(data => {
             badge.textContent = data.count;
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        fetch('/it3103a-todo/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
+        fetch('/it3103a-todo/IT3103A-PAINTING%20CHURVA/php/getCartCount.php')
         .then(r => r.json())
         .then(data => {
             document.getElementById('cartCount').textContent = data.count;
