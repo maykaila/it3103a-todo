@@ -64,7 +64,7 @@ function deleteArtwork(id) {
 
 function deleteArtist(id) {
   if (!confirm('Delete this artist?')) return;
-  fetch(`../php/deleteArtist.php?id=${id}`,{method:'DELETE'})
+  fetch(`../php/deleteArtists.php?id=${id}`,{method:'DELETE'})
     .then(r=>r.json()).then(j=>{
       if (j.success) location.reload();
       else alert('Error: '+j.message);
